@@ -1,0 +1,15 @@
+{
+  "bfw": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-bfw-bfw-83405-authRole",
+      "UnauthRoleArn": "arn:aws:iam::856233086576:role/amplify-bfw-bfw-83405-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::856233086576:role/amplify-bfw-bfw-83405-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-bfw-bfw-83405-deployment",
+      "UnauthRoleName": "amplify-bfw-bfw-83405-unauthRole",
+      "StackName": "amplify-bfw-bfw-83405",
+      "StackId": "arn:aws:cloudformation:us-east-1:856233086576:stack/amplify-bfw-bfw-83405/1b324390-3319-11eb-b911-1245bb6cedee",
+      "AmplifyAppId": "d1oh7c2dikkkv"
+    }
+  }
+}
