@@ -5,6 +5,7 @@ import { HeaderBackButton } from '@react-navigation/stack';
 import Landing from './Landing';
 import Login from './Login';
 import CommunityRules from './CommunityRules';
+import MembershipFee from './MembershipFee';
 
 const Stack = createStackNavigator();
 
@@ -55,6 +56,11 @@ export function SignUpNavigationStack() {
           title: 'Community Rules',
           headerLeft: HeaderLeft
         }}
+      />
+      <Stack.Screen
+        name="MembershipFee"
+        component={MembershipFee}
+        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
