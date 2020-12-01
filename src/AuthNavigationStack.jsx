@@ -6,6 +6,7 @@ import Landing from './Landing';
 import Login from './Login';
 import CommunityRules from './CommunityRules';
 import MembershipFee from './MembershipFee';
+import CreateAccount from './CreateAccount';
 import { primary_color } from './styles';
 
 const Stack = createStackNavigator();
@@ -69,6 +70,13 @@ export function SignUpNavigationStack() {
         options={{
           title: 'Community Rules',
           headerLeft: HeaderLeft
+        }}
+      />
+      <Stack.Screen
+        name="CreateAccount"
+        component={CreateAccount}
+        options={{
+          title: 'Create Profile'
         }}
       />
       <Stack.Screen
