@@ -1,6 +1,7 @@
 import React from 'react';
 import { ScrollView, Pressable, Text, View } from 'react-native';
 import BGScreen from './BackgroundScreen';
+import { primary_color } from './styles';
 
 export default function CommunityRules({ navigation }) {
   return (
@@ -15,7 +16,7 @@ export default function CommunityRules({ navigation }) {
         </Text>
 
         <Pressable 
-          style={{ alignItems: 'center', borderRadius: 12, backgroundColor: 'orange', padding: 15, width: '100%' }}
+          style={{ alignItems: 'center', borderRadius: 12, backgroundColor: primary_color, padding: 15, width: '100%' }}
           onPress={() => navigation.navigate('MembershipFee')}
         >
           <Text style={{ color: 'white', fontSize: 16 }}>Create Account</Text>

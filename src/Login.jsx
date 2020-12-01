@@ -1,6 +1,7 @@
 import React from 'react';
-import { Authenticator, SignIn, ForgotPassword } from 'aws-amplify-react-native';
+import { Authenticator } from 'aws-amplify-react-native';
 import { StatusBar } from 'react-native';
+import SignIn from './SignIn';
 
 export default function Login({ navigation }) {
   const onChangeState = (state) => {
@@ -8,10 +9,14 @@ export default function Login({ navigation }) {
   };
 
   return (
-    <Authenticator hideDefault={true} onStateChange={onChangeState}>
+    <Authenticator
+      hideDefault={true}
+      onStateChange={onChangeState}
+      usernameAttributes="email"
+      theme={{ container: { flex: 1 } }}
+    >
       <StatusBar barStyle="dark-content" />
-      <SignIn />
-      <ForgotPassword />
+      <SignIn override="SignIn" />
     </Authenticator>
   );
 }

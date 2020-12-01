@@ -3,6 +3,7 @@ import { Text, View } from 'react-native';
 import { Link } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import BackgroundScreen from './BackgroundScreen';
+import { primary_color } from './styles';
 
 export default function Landing() {
   return (
@@ -12,7 +13,7 @@ export default function Landing() {
       <View 
         style={{ 
           padding: 20, 
-          backgroundColor: 'darkorange', 
+          backgroundColor: primary_color, 
           alignItems: 'center', 
           justifyContent: 'center',
           height: 200 
@@ -21,17 +22,19 @@ export default function Landing() {
         <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 15 }}>
           <Link
             to="/SignUp"
-            style={{ color: 'white', fontSize: 20, fontWeight: 'bold', marginRight: 10 }}
+            style={{ color: 'white', fontSize: 22, fontWeight: 'bold', marginRight: 10 }}
           >
             Get Started
           </Link>
-          <Ionicons name="ios-arrow-forward" size={22} color="white" />
+          <Ionicons name="ios-arrow-forward" size={28} color="white" />
         </View>
 
-        <Text style={{ fontSize: 14, color: 'white' }}>
-          Already have an account?{" "}
-          <Link to="/Login" style={{ color: 'white' }}>Sign In</Link>
+        <Text style={{ fontSize: 16, color: 'white', marginBottom: 5 }}>
+          Already have an account?
         </Text>
+        <Link to="/Login" style={{ fontSize: 16, color: 'white', textDecorationLine: 'underline' }}>
+          Sign In
+        </Link>
       </View>
     </BackgroundScreen>
   );

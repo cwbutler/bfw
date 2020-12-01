@@ -2,11 +2,12 @@ import React from 'react';
 import { Pressable, Text } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import BGScreen from './BackgroundScreen';
+import { primary_color } from './styles';
 
 export default function MembershipFee() {
   return (
     <BGScreen
-      backgroundStyle={{ backgroundColor: 'orange' }}
+      backgroundStyle={{ backgroundColor: primary_color }}
       contentStyle={{ padding: 30, alignItems: 'center', justifyContent: 'center' }}
     >
       <Text style={{ fontSize: 40, color: 'white', fontWeight: 'bold', textAlign: 'center' }}>

@@ -6,6 +6,7 @@ import Landing from './Landing';
 import Login from './Login';
 import CommunityRules from './CommunityRules';
 import MembershipFee from './MembershipFee';
+import { primary_color } from './styles';
 
 const Stack = createStackNavigator();
 
@@ -14,9 +15,21 @@ function HeaderLeft(props) {
   return <HeaderBackButton {...props} onPress={() => navigation.navigate('Landing')} />;
 }
 
+const defaultScreenOptions = {
+  headerBackTitle: ' ', 
+  headerStyle: { backgroundColor: primary_color},
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+};
+
 export default function AuthNavigationStack() {
   return (
-    <Stack.Navigator initialRouteName="Landing">
+    <Stack.Navigator
+      initialRouteName="Landing"
+      screenOptions={defaultScreenOptions}
+    >
       <Stack.Screen
         name="Landing"
         component={Landing}
@@ -26,9 +39,13 @@ export default function AuthNavigationStack() {
         name="Login"
         component={Login}
         options={{ 
-          headerBackTitle: " ", 
-          headerStyle: { backgroundColor: 'orange'},
-          headerTitleStyle: { color: 'white'}
+          title: 'Sign In',
+          headerBackTitle: ' ', 
+          headerStyle: { backgroundColor: primary_color},
+          headerTintColor: '#fff',
+          headerTitleStyle: {
+            fontWeight: 'bold',
+          },
         }}
       />
       <Stack.Screen
@@ -43,11 +60,8 @@ export default function AuthNavigationStack() {
 export function SignUpNavigationStack() {
   return (
     <Stack.Navigator
-      screenOptions={{
-        headerStyle: { backgroundColor: 'orange' },
-        headerBackTitle: ' ',
-        headerTitleStyle: { color: 'white' }
-      }}
+      initialRouteName="CommunityRules"
+      screenOptions={defaultScreenOptions}
     >
       <Stack.Screen
         name="CommunityRules"
