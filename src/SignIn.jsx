@@ -22,7 +22,7 @@ export default function SignIn() {
       <View style={{ flexDirection: 'column', padding: 10, flex: 1 }}>
         <Input
           control={control}
-          errors={errors}
+          errors={errors.email}
           name="email"
           placeholder="Email*"
           rules={{ required: true }}
@@ -31,7 +31,7 @@ export default function SignIn() {
   
         <Input
           control={control}
-          errors={errors}
+          errors={errors.password}
           name="password"
           placeholder="Password*"
           rules={{ required: true }}
@@ -64,7 +64,7 @@ export default function SignIn() {
 }
 
 function Input(props) {
-  const hasError = props.errors && props.errors[props.name];
+  const hasError = props.errors;
   const isPassword = props.name === 'password';
 
   return (
