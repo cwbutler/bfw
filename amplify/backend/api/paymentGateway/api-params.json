@@ -1,0 +1,35 @@
+{
+    "paths": [
+        {
+            "name": "/payment",
+            "lambdaFunction": "paymentGateway",
+            "privacy": {
+                "open": true
+            },
+            "policyResourceName": "/payment"
+        }
+    ],
+    "resourceName": "paymentGateway",
+    "apiName": "paymentGateway",
+    "functionArns": [
+        {
+            "lambdaFunction": "paymentGateway"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "amplify-bfw-bfw-83405-authRole",
+        "unAuthRoleName": "amplify-bfw-bfw-83405-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "paymentGateway",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

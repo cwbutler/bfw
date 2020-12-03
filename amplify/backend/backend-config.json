@@ -6,5 +6,28 @@
       "dependsOn": [],
       "customAuth": false
     }
+  },
+  "function": {
+    "paymentGateway": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "api": {
+    "paymentGateway": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "paymentGateway",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ]
+    }
   }
 }
