@@ -1,6 +1,26 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
+export const createAppUser = /* GraphQL */ `
+  mutation CreateAppUser($input: UserInput) {
+    createAppUser(input: $input) {
+      id
+      email
+      firstName
+      lastName
+      memberNumber
+      active
+      subscriptionId
+      payPalId
+      cashAppId
+      applePayId
+      googlePayId
+      avatar
+      createdAt
+      updatedAt
+    }
+  }
+`;
 export const createUser = /* GraphQL */ `
   mutation CreateUser(
     $input: CreateUserInput!

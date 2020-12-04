@@ -12,3 +12,22 @@ type User @model {
   googlePayId: String
   avatar: String
 }
+
+type Mutation {
+  createAppUser(input: UserInput): User @function(name: "bfwCreateUserResolver-${env}")
+}
+
+input UserInput {
+  email: String!
+  password: String!
+  firstName: String
+  lastName: String
+  memberNumber: String
+  active: Boolean
+  subscriptionId: String
+  payPalId: String
+  cashAppId: String
+  applePayId: String
+  googlePayId: String
+  avatar: String
+}
