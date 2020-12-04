@@ -69,7 +69,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-bfw-bfw-83405-deployment",
-          "S3Key": "amplify-builds/paymentGateway-3571704e6c7577435639-build.zip"
+          "S3Key": "amplify-builds/paymentGateway-454c2f6962476b637334-build.zip"
         }
       }
     },

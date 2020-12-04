@@ -1,0 +1,14 @@
+type User @model {
+  id: ID!
+  email: String
+  firstName: String
+  lastName: String
+  memberNumber: String
+  active: Boolean
+  subscriptionId: String
+  payPalId: String
+  cashAppId: String
+  applePayId: String
+  googlePayId: String
+  avatar: String
+}

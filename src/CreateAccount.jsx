@@ -8,7 +8,6 @@ export default function CreateAccount({ navigation }) {
   const { control, handleSubmit, errors } = useForm();
   const onSubmit = data => {
     console.log('createAccount', data);
-    navigation.navigate('MembershipFee');
   };
 
   return (
@@ -49,6 +48,7 @@ export default function CreateAccount({ navigation }) {
         </View>
 
         <HeaderTitle text="Personal Information" />
+
         <View style={{ marginBottom: 18 }}>
           <Input
             control={control}
