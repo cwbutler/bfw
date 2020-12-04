@@ -4,11 +4,81 @@
     <title>Subscribe To Black Family Wealth</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <style>
+      html, body {
+        margin: 0;
+        padding: 0;
+      }
+
+      #page {
+        display: flex;
+        flex-direction: column;
+        background-color: black;
+        width: 100vw;
+        height: 100vh;
+        align-self: stretch;
+      }
+
+      #heading {
+        display: flex;
+        flex-direction: column;
+        flex: .66;
+        color: white;
+        margin: 20px 0;
+      }
+
+      #heading h1 {
+        text-align: center;
+        text-transform: uppercase;
+        margin-bottom: 25px;
+      }
+
+      #heading h1 span {
+        font-size: 18px;
+        text-transform: lowercase;
+      }
+
+      #priceInfo {
+        background-color: darkslategray;
+        padding: 20px;
+        margin: 5%;
+      }
+
+      #placeholder {
+        height: 100px;
+      }
+
+      #paypal-button-container {
+        display: flex;
+        flex: .33;
+        min-height: 200px;
+        align-items: center;
+        justify-content: center;
+        background-color: darkorange;
+        padding: 14px;
+      }
+    </style>
   </head>
   <body>
-    <div id="paypal-button-container"></div>
+    <div id="page">
+      <div id="heading">
+        <h1>Membership</h1>
+
+        <div id="priceInfo">
+          <h1>$5.99 <span>/month</span></h1>
+          <div id="placeholder"></div>
+        </div>
+      </div>
+      <div id="paypal-button-container"></div>
+    </div>
+
     <script src="https://www.paypal.com/sdk/js?client-id=AWpvdvm8iY8J59xMvZ5HAL17e3MVY03gEUX4Dpu95D2HObgTp3p8EAbmRBKVdXaFHeE6l7-v9DgrB_ug&vault=true&intent=subscription" data-sdk-integration-source="button-factory"></script>
     <script>
+      const origin = window.location.origin;
+      const pathname = window.location.pathname.split("/").slice(0, -1).join("/");
+      const url = origin + pathname;
+
       paypal.Buttons({
           style: {
               shape: 'pill',
@@ -18,18 +88,22 @@
           },
           createSubscription: function(data, actions) {
             return actions.subscription.create({
-              'plan_id': 'P-72N38644GG578520WL7EVWPY'
+              plan_id: 'P-72N38644GG578520WL7EVWPY',
+              application_context: {
+                brand_name: "Black Family Wealth",
+                locale: "en-US",
+                user_action: "SUBSCRIBE_NOW"
+              }
             });
           },
           onApprove: function(data) {
-            window.location.href = "/subscribeSuccess";
+            window.location.href = `${url}/subscribeSuccess`;
           },
           onCancel: function(data) {
-            window.location.href = "/subscribeCancelled";
+            window.location.href = `${url}/subscribeCancelled`;
           },
           onError: function(error) {
-            console.error(error);
-            window.location.href = "/subscribeCancelled";
+            window.location.href = `${url}/subscribeCancelled`;
           }
       }).render('#paypal-button-container');
     </script>

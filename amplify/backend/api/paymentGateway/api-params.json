@@ -1,12 +1,25 @@
 {
     "paths": [
         {
-            "name": "/payment",
+            "name": "/subscribe",
             "lambdaFunction": "paymentGateway",
             "privacy": {
                 "open": true
-            },
-            "policyResourceName": "/payment"
+            }
+        },
+        {
+            "name": "/subscribeSuccess",
+            "lambdaFunction": "paymentGateway",
+            "privacy": {
+                "open": true
+            }
+        },
+        {
+            "name": "/subscribeCancelled",
+            "lambdaFunction": "paymentGateway",
+            "privacy": {
+                "open": true
+            }
         }
     ],
     "resourceName": "paymentGateway",
@@ -31,5 +44,6 @@
                 "Arn"
             ]
         }
-    ]
+    ],
+    "uuid": "2e187ecd"
 }
