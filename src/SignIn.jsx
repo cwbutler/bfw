@@ -1,12 +1,16 @@
 import React from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
+import { Auth } from 'aws-amplify';
 import BGScreen from './BackgroundScreen';
 import { primary_color } from './styles';
 
 export default function SignIn() {
   const { control, handleSubmit, errors } = useForm();
-  const onSubmit = data => console.log('signIn', data);
+  const onSubmit = async ({ email, password }) => {
+    const result = await Auth.signIn(email, password);
+    console.log(result);
+  };
 
   return (
     <BGScreen>

@@ -1,13 +1,29 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Text, TextInput, ScrollView, View, Pressable } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
+import { createUser, signUp } from './api/auth';
 import BGScreen from './BackgroundScreen';
+import Loader from './FullViewLoader';
 import { primary_color } from './styles';
 
 export default function CreateAccount({ navigation }) {
   const { control, handleSubmit, errors } = useForm();
-  const onSubmit = data => {
-    console.log('createAccount', data);
+  const [isLoading, setIsLoading] = useState(false);
+  const onSubmit = async input => {
+    try {
+      setIsLoading(true);
+      const cognitoUser = await signUp(input);
+      await createUser({
+        ...input,
+        id: cognitoUser.getUsername,
+        password: undefined
+      }); 
+      setIsLoading(false);
+      navigation.navigate('Login');
+    } catch (e) {
+      console.log(e);
+      setIsLoading(false);
+    }
   };
 
   return (
@@ -15,6 +31,7 @@ export default function CreateAccount({ navigation }) {
       backgroundStyle={{ backgroundColor: 'whitesmoke' }}
       contentStyle={{ padding: 14, paddingTop: 20 }}
     >
+      {isLoading && <Loader size="large" />}
       <ScrollView>
         <HeaderTitle text="Create Account" />
         <View style={{ marginBottom: 20 }}>
@@ -35,16 +52,7 @@ export default function CreateAccount({ navigation }) {
             rules={{ required: true }}
             textContentType="password"
             secureTextEntry
-          />
-          <Input
-            control={control}
-            errors={errors.confirmPassword}
-            name="confirmPassword"
-            placeholder="Confirm password"
-            rules={{ required: true }}
-            textContentType="password"
-            secureTextEntry
-          />
+          />    
         </View>
 
         <HeaderTitle text="Personal Information" />
@@ -66,43 +74,50 @@ export default function CreateAccount({ navigation }) {
             textContentType="familyName"
             autoCompleteType="name"
           />
-          <Input
+          {/*<Input
             control={control}
             errors={errors.phone}
             name="phone"
             placeholder="Phone number"
             textContentType="telephoneNumber"
             autoCompleteType="tel"
-          />
+          />*/}
           <Input
             control={control}
             errors={errors.paypal}
-            name="paypal"
+            name="payPalId"
             placeholder="PayPal"
           />
           <Input
             control={control}
             errors={errors.cashApp}
-            name="cashApp"
+            name="cashAppId"
             placeholder="Cash App"
           />
           <Input
             control={control}
             errors={errors.applePay}
-            name="applePay"
+            name="applePayId"
             placeholder="Apple Pay"
           />
           <Input
             control={control}
             errors={errors.androidPay}
-            name="androidPay"
+            name="googlePayId"
             placeholder="Android Pay"
           />
         </View>
 
         <Pressable
-          style={{ alignItems: 'center', borderRadius: 12, backgroundColor: primary_color, padding: 15, width: '100%' }}
+          style={{ 
+            alignItems: 'center', 
+            borderRadius: 12, 
+            backgroundColor: primary_color, 
+            padding: 15, 
+            width: '100%' 
+          }}
           onPress={handleSubmit(onSubmit)}
+          disabled={isLoading}
         >
           <Text style={{ color: 'white', fontSize: 16 }}>
             Create Account

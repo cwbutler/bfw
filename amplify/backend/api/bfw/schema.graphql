@@ -1,4 +1,6 @@
-type User @model {
+type User @model
+  @auth(rules: [{ allow: public, provider: iam, operations: [create] }]) 
+{
   id: ID!
   email: String
   firstName: String

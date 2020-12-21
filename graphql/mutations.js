@@ -21,29 +21,6 @@ export const createAppUser = /* GraphQL */ `
     }
   }
 `;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    createUser(input: $input, condition: $condition) {
-      id
-      email
-      firstName
-      lastName
-      memberNumber
-      active
-      subscriptionId
-      payPalId
-      cashAppId
-      applePayId
-      googlePayId
-      avatar
-      createdAt
-      updatedAt
-    }
-  }
-`;
 export const updateUser = /* GraphQL */ `
   mutation UpdateUser(
     $input: UpdateUserInput!
@@ -73,6 +50,29 @@ export const deleteUser = /* GraphQL */ `
     $condition: ModelUserConditionInput
   ) {
     deleteUser(input: $input, condition: $condition) {
+      id
+      email
+      firstName
+      lastName
+      memberNumber
+      active
+      subscriptionId
+      payPalId
+      cashAppId
+      applePayId
+      googlePayId
+      avatar
+      createdAt
+      updatedAt
+    }
+  }
+`;
+export const createUser = /* GraphQL */ `
+  mutation CreateUser(
+    $input: CreateUserInput!
+    $condition: ModelUserConditionInput
+  ) {
+    createUser(input: $input, condition: $condition) {
       id
       email
       firstName

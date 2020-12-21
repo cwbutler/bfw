@@ -1,3 +1,17 @@
 {
-  "lambdaLayers": []
+  "lambdaLayers": [],
+  "permissions": {
+    "auth": {
+      "bfwfc5bcfcd": [
+        "create",
+        "read"
+      ]
+    },
+    "api": {
+      "bfw": [
+        "create",
+        "read"
+      ]
+    }
+  }
 }
