@@ -1,1 +1,1 @@
-export const primary_color = 'darkorange';
+export const primary_color = '#ef9723';
