@@ -15,10 +15,9 @@ export default function CreateAccount({ navigation }) {
       const cognitoUser = await signUp(input);
       await createUser({
         ...input,
-        id: cognitoUser.getUsername,
+        id: cognitoUser.getUsername.toLowerCase(),
         password: undefined
       }); 
-      setIsLoading(false);
       navigation.navigate('Login');
     } catch (e) {
       console.log(e);

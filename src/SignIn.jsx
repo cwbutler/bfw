@@ -7,7 +7,7 @@ import Loader from './FullViewLoader';
 import { primary_color } from './styles';
 
 export default function SignIn({ navigation }) {
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
   const { control, handleSubmit, errors } = useForm();
   const onSubmit = async ({ email, password }) => {
     setIsLoading(true);
@@ -17,10 +17,7 @@ export default function SignIn({ navigation }) {
       if (e.code === 'UserNotConfirmedException') {
         navigation.navigate('VerifyAccount', { email });
       }
-    } finally {
-      setIsLoading(false);
     }
-    
   };
 
   return (
