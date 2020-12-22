@@ -13,6 +13,7 @@ export default function ConfirmUser(props) {
       email: props.route.params.email,
       code
     });
+    props.navigation.navigate('Landing');
   } 
 
   return (
