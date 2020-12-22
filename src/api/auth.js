@@ -21,6 +21,10 @@ export async function createUser(input) {
 
 export async function confirmUser({ email, code }) {
   const data = await Auth.confirmSignUp(email, code);
-  console.log(data);
+  return data;
+}
+
+export async function updateUserAttributes({ user, attributes }) {
+  const data = await Auth.updateUserAttributes(user, attributes);
   return data;
 }

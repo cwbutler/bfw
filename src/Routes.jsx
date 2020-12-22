@@ -1,20 +1,14 @@
-import React, { useEffect, useState } from 'react';
-import { Auth } from 'aws-amplify';
+import React from 'react';
+import useAWSUser from './useAWSUser';
 import Providers from './Providers';
 import AuthStack from './AuthNavigationStack';
+import AppStack from './AppNavigationStack';
 
 export default function Routes() {
-  const [user, setUser] = useState();
-
-  useEffect(() => {
-    Auth.currentAuthenticatedUser()
-      .then((result) => console.log(result))
-      .catch(e => console.log(e));
-  }, []);
-
+  const user = useAWSUser();
   return (
     <Providers>
-      {(user) ? null : <AuthStack />}
+      {(user) ? <AppStack /> : <AuthStack />}
     </Providers>
   );
 }

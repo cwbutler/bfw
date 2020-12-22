@@ -5,7 +5,6 @@ import { HeaderBackButton } from '@react-navigation/stack';
 import Landing from './Landing';
 import Login from './SignIn';
 import CommunityRules from './CommunityRules';
-import MembershipFee from './MembershipFee';
 import CreateAccount from './CreateAccount';
 import ConfirmUser from './ConfirmUser';
 import { primary_color } from './styles';
@@ -86,11 +85,6 @@ export function SignUpNavigationStack() {
         options={{
           title: 'Create Profile'
         }}
-      />
-      <Stack.Screen
-        name="MembershipFee"
-        component={MembershipFee}
-        options={{ headerShown: false }}
       />
     </Stack.Navigator>
   );
