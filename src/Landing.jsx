@@ -1,5 +1,5 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, Image } from 'react-native';
 import { Link } from '@react-navigation/native';
 import { Ionicons } from '@expo/vector-icons';
 import BackgroundScreen from './BackgroundScreen';
@@ -8,7 +8,9 @@ import { primary_color } from './styles';
 export default function Landing() {
   return (
     <BackgroundScreen>
-      <View style={{ flex: 1 }} />
+      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+        <Image source={require('../assets/HomeLogo.png')} />
+      </View>
 
       <View 
         style={{ 

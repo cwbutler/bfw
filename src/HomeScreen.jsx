@@ -8,10 +8,10 @@ export default function HomeScreen() {
     <BGView>
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <Text style={{ color: 'white', fontSize: 34 }}>Home</Text>
-
+    
         <Pressable onPress={() => Auth.signOut()}>
           <Text style={{ color: 'white' }}>Log Out</Text>
-        </Pressable>
+        </Pressable> 
       </View>
     </BGView>
   );

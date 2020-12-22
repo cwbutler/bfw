@@ -12,7 +12,7 @@ export default function SignIn({ navigation }) {
   const onSubmit = async ({ email, password }) => {
     setIsLoading(true);
     try {
-      await Auth.signIn(email, password);
+      await Auth.signIn(email.toLowerCase(), password);
     } catch (e) {
       if (e.code === 'UserNotConfirmedException') {
         navigation.navigate('VerifyAccount', { email });

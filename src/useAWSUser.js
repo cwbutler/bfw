@@ -26,8 +26,6 @@ export default function useAWSUser() {
     };
     
     Hub.listen('auth', listener);
-
-    return () => Hub.remove('auth', listener);
   }, []);
 
   return user;
