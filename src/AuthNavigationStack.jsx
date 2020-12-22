@@ -3,10 +3,11 @@ import { useNavigation } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { HeaderBackButton } from '@react-navigation/stack';
 import Landing from './Landing';
-import Login from './Login';
+import Login from './SignIn';
 import CommunityRules from './CommunityRules';
 import MembershipFee from './MembershipFee';
 import CreateAccount from './CreateAccount';
+import ConfirmUser from './ConfirmUser';
 import { primary_color } from './styles';
 
 const Stack = createStackNavigator();
@@ -53,6 +54,13 @@ export default function AuthNavigationStack() {
         name="SignUp"
         component={SignUpNavigationStack}
         options={{ headerShown: false }}
+      />
+      <Stack.Screen
+        name="VerifyAccount"
+        component={ConfirmUser}
+        options={{
+          title: 'Verify Account'
+        }}
       />
     </Stack.Navigator>
   );

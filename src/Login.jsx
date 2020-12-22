@@ -1,5 +1,5 @@
 import React from 'react';
-import { Authenticator } from 'aws-amplify-react-native';
+import { Authenticator, ConfirmSignIn } from 'aws-amplify-react-native';
 import { StatusBar } from 'react-native';
 import SignIn from './SignIn';
 
@@ -17,6 +17,7 @@ export default function Login({ navigation }) {
     >
       <StatusBar barStyle="dark-content" />
       <SignIn override="SignIn" />
+      <ConfirmSignIn/>
     </Authenticator>
   );
 }

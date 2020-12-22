@@ -1,19 +1,31 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Pressable, Text, TextInput, View } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import { Auth } from 'aws-amplify';
 import BGScreen from './BackgroundScreen';
+import Loader from './FullViewLoader';
 import { primary_color } from './styles';
 
-export default function SignIn() {
+export default function SignIn({ navigation }) {
+  const [isLoading, setIsLoading] = useState(true);
   const { control, handleSubmit, errors } = useForm();
   const onSubmit = async ({ email, password }) => {
-    const result = await Auth.signIn(email, password);
-    console.log(result);
+    setIsLoading(true);
+    try {
+      await Auth.signIn(email, password);
+    } catch (e) {
+      if (e.code === 'UserNotConfirmedException') {
+        navigation.navigate('VerifyAccount', { email });
+      }
+    } finally {
+      setIsLoading(false);
+    }
+    
   };
 
   return (
     <BGScreen>
+      {isLoading && <Loader size="large" />}
       <View style={{ marginTop: 100, marginBottom: 60 }}>
         <Text style={{ fontSize: 30, fontWeight: 'bold', color: 'white', textAlign: 'center' }}>
           Welcome Back
