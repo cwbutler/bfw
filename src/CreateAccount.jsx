@@ -12,13 +12,16 @@ export default function CreateAccount({ navigation }) {
   const onSubmit = async input => {
     try {
       setIsLoading(true);
-      const cognitoUser = await signUp(input);
-      await createUser({
+      const dbUser = await createUser({
         ...input,
-        id: cognitoUser.getUsername.toLowerCase(),
         password: undefined
-      }); 
-      navigation.navigate('Login');
+      });
+
+      // Save ref to profile in db.
+      input.profile = dbUser.id;
+
+      await signUp(input);
+      navigation.navigate('VerifyAccount', { email: input.email });
     } catch (e) {
       console.log(e);
       setIsLoading(false);

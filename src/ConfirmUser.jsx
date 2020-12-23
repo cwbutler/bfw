@@ -3,21 +3,25 @@ import { Pressable, Text, View } from 'react-native';
 import { TextInput } from 'react-native-gesture-handler';
 import BGView from './BackgroundScreen';
 import { confirmUser } from './api/auth';
+import Loader from './FullViewLoader';
 import { primary_color } from './styles';
 
 export default function ConfirmUser(props) {
   const [code, setCode] = useState('');
+  const [isLoading, setIsLoading] = useState(false);
 
   async function onSubmit() {
+    setIsLoading(true);
     await confirmUser({
       email: props.route.params.email,
       code
     });
-    props.navigation.navigate('Landing');
+    props.navigation.navigate('Login');
   } 
 
   return (
     <BGView>
+      {isLoading && <Loader size="large" />}
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 20 }}>
         <Text style={{ color: 'white', fontSize: 18, textAlign: 'center', marginBottom: 15 }}>
           Please enter confirmation code sent to your email.

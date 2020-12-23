@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "bfw",
+    "name": "Black Family Wealth",
     "slug": "bfw",
-    "version": "1.0.0",
+    "version": "0.1.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {
@@ -18,17 +18,20 @@
     ],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.project9.bfw"
+      "bundleIdentifier": "com.project9.bfw",
+      "buildNumber": "0.1.0"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#000000"
-      }
+      },
+      "versionCode": 1,
+      "package": "com.project9.bfw"
     },
     "web": {
       "favicon": "./assets/favicon.png"
     },
-    "description": ""
+    "description": "Black Family Wealth"
   }
 }

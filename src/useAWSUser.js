@@ -1,7 +1,19 @@
-import { useState, useEffect } from 'react';
+import React from 'react';
+import { useState, useEffect, createContext } from 'react';
 import { Auth, Hub } from 'aws-amplify';
 
-export default function useAWSUser() {
+export const AWSUserContext = createContext();
+
+export default function AWSUserProvider(props) {
+  const user = useAWSUser();
+  return (
+    <AWSUserContext.Provider value={user}>
+      {props.children}
+    </AWSUserContext.Provider>
+  );
+}
+
+export function useAWSUser() {
   const [user, setUser] = useState();
 
   useEffect(() => {
@@ -13,6 +25,7 @@ export default function useAWSUser() {
       .catch(e => console.log(e));
     
     const listener = async (data) => {
+      console.log(data.payload.event);
       switch (data.payload.event) {
         case 'signIn':
           console.info('user signed in', data);

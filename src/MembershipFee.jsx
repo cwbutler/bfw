@@ -1,18 +1,18 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { updateUserAttributes } from './api/auth';
 import { useNavigation } from '@react-navigation/native';
 import BGScreen from './BackgroundScreen';
 import PayPalView from './PayPalView';
-import useAWSUser from './useAWSUser';
+import { AWSUserContext } from './useAWSUser';
 
 // sb-7k5t33965607@personal.example.com
 // .$cxK%9t
 
 export default function MembershipFee(props) {
-  const user = useAWSUser();
+  const user = useContext(AWSUserContext);
   const navigation = useNavigation();
   return (
-    <BGScreen>
+    <BGScreen contentStyle={{ backgroundColor: 'black' }}>
       <PayPalView
         onSuccess={async () => {
           await updateUserAttributes({ user, attributes: { 'custom:subscribed': '1' } })

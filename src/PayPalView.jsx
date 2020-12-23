@@ -1,17 +1,17 @@
 import React, { useState } from 'react';
 import { WebView } from 'react-native-webview';
 import { API } from 'aws-amplify';
-import { SafeAreaView } from 'react-native';
+import BGView from './BackgroundScreen';
 
 export default function PayPalSubscribeView(props) {
   const [url, setUrl] = useState('');
   API.endpoint('paymentGateway').then((end) => setUrl(end));
 
   return (
-    <SafeAreaView style={{ alignSelf: 'stretch', flex: 1 }}>
+    <BGView contentStyle={{ alignSelf: 'stretch', flex: 1, backgroundColor: 'black' }}>
       <WebView
         source={{ uri: `${url}/subscribe` }}
-        style={{ flex: 1, backgroundColor: 'darkorange' }}
+        style={{ flex: 1, backgroundColor: 'black' }}
         onNavigationStateChange={(data) => {
           if (data.title === 'cancelled') {
             props.onCancel && props.onCancel(data);
@@ -21,6 +21,6 @@ export default function PayPalSubscribeView(props) {
           }
         }}
       />
-    </SafeAreaView>
+    </BGView>
   );
 }
