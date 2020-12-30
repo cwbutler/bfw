@@ -4,6 +4,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import { AWSUserContext } from './useAWSUser';
 import MembershipFee from './MembershipFee';
 import HomeScreen from './HomeScreen';
+import DrawerContent from './DrawerContent';
 import { primary_color } from './styles';
 
 const Stack = createStackNavigator();
@@ -17,8 +18,9 @@ export function DrawerNavigator() {
         headerShown: true,
         headerStyle: {
           backgroundColor: primary_color,
-        },
+        }
       }}
+      drawerContent={DrawerContent}
     >
       <Drawer.Screen 
         name="Home" 
@@ -31,10 +33,10 @@ export function DrawerNavigator() {
 
 export default function AppNavigationStack() {
   const user = useContext(AWSUserContext);
-  const [subscribed, setSubscribed] = useState();
+  const [subscribed, setSubscribed] = useState(true);
 
   useEffect(() => {
-    setSubscribed(Number(user?.attributes['custom:subscribed']));
+    //setSubscribed(Number(user?.attributes['custom:subscribed']));
   }, [user]);
 
   return (!subscribed) ? (

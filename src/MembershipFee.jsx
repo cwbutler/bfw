@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext } from 'react';
 import { updateUserAttributes } from './api/auth';
 import { useNavigation } from '@react-navigation/native';
 import BGScreen from './BackgroundScreen';
@@ -11,12 +11,6 @@ import { AWSUserContext } from './useAWSUser';
 export default function MembershipFee(props) {
   const user = useContext(AWSUserContext);
   const navigation = useNavigation();
-
-  useEffect(() => {
-    if (process.env.NODE_ENV !== 'production') {
-      props.setSubscribed(true);
-    }
-  }, []);
 
   return (
     <BGScreen contentStyle={{ backgroundColor: 'black' }}>
