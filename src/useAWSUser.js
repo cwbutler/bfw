@@ -14,7 +14,7 @@ export default function AWSUserProvider(props) {
 }
 
 export function useAWSUser() {
-  const [user, setUser] = useState();
+  const [user, setUser] = useState({});
 
   useEffect(() => {
     Auth.currentAuthenticatedUser()
@@ -25,7 +25,6 @@ export function useAWSUser() {
       .catch(e => console.log(e));
     
     const listener = async (data) => {
-      console.log(data.payload.event);
       switch (data.payload.event) {
         case 'signIn':
           console.info('user signed in', data);

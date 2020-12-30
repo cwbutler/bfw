@@ -1,23 +1,23 @@
 import React, { useContext } from 'react';
-import { Pressable, Text, View } from 'react-native';
-import { Auth } from 'aws-amplify';
-import BGView from './BackgroundScreen';
+import { Text, View } from 'react-native';
 import { AWSUserContext } from './useAWSUser';
+import BGView from './BackgroundScreen';
+import Avatar from './Avatar';
 
 export default function HomeScreen() {
   const user = useContext(AWSUserContext);
-  console.log(user.attributes);
 
   return (
     <BGView statusBarStyle="dark-content">
       <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
-        <Text style={{ color: 'white', fontSize: 34 }}>
-          {user.attributes.name}
+        <Avatar style={{ marginTop: 20 }} />
+
+        <Text style={{ color: 'white', fontSize: 34, marginTop: 16 }}>
+          {user?.attributes?.name}
         </Text>
-    
-        <Pressable onPress={() => Auth.signOut()}>
-          <Text style={{ color: 'white' }}>Log Out</Text>
-        </Pressable> 
+        <Text style={{ color: 'white', fontSize: 16, marginTop: 8, fontWeight: 'bold' }}>
+          Community #TBD
+        </Text>
       </View>
     </BGView>
   );
