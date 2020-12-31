@@ -14,5 +14,5 @@ export default function Routes() {
 
 function AppNavigation() {
   const user = useContext(AWSUserContext);
-  return (user) ? <AppStack /> : <AuthStack />;
+  return (user?.attributes) ? <AppStack /> : <AuthStack />;
 }

@@ -12,7 +12,9 @@ export default function AppNavigationStack() {
   const [subscribed, setSubscribed] = useState(true);
 
   useEffect(() => {
-    //setSubscribed(Number(user?.attributes['custom:subscribed']));
+    if (user?.attributes) {
+      //setSubscribed(Number(user.attributes['custom:subscribed']));
+    }
   }, [user]);
 
   return (!subscribed) ? (
