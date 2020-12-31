@@ -24,12 +24,13 @@ export default function DrawerContent(props) {
 
 function DrawerHeader() {
   const user = useContext(AWSUserContext);
+  const hasName = Boolean(user?.attributes?.name?.trim());
   return (  
     <View style={{ alignItems: 'center', padding: 12 }}>
       <Avatar />
       <View style={{ marginTop: 16, marginBottom: 8 }}>
-        <Text style={{ color: 'white', fontSize: 26 }}>
-          {user?.attributes?.name}
+        <Text style={{ color: 'white', fontSize: hasName ? 26 : 14 }}>
+          {hasName ? user?.attributes?.name : user?.attributes?.email}
         </Text>
       </View>
     </View>

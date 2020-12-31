@@ -27,9 +27,9 @@ export default function CommunityRules({ navigation }) {
 
         <Pressable 
           style={{ alignItems: 'center', borderRadius: 12, backgroundColor: primary_color, padding: 15, width: '100%' }}
-          onPress={() => navigation.navigate('CreateAccount')}
+          onPress={() => navigation.navigate('Subscribe')}
         >
-          <Text style={{ color: 'white', fontSize: 16 }}>Create Account</Text>
+          <Text style={{ color: 'white', fontSize: 16 }}>Continue</Text>
         </Pressable>
       </View>
     </BGScreen>

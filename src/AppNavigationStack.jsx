@@ -3,9 +3,17 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { AWSUserContext } from './useAWSUser';
 import DrawerNavigator from './DrawerNavigator';
 import MembershipFee from './MembershipFee';
-import HomeScreen from './HomeScreen';
+import CommunityRules from './CommunityRules';
+import { primary_color } from './styles';
 
 const Stack = createStackNavigator();
+const defaultScreenOptions = { 
+  headerStyle: { backgroundColor: primary_color },
+  headerTintColor: '#fff',
+  headerTitleStyle: {
+    fontWeight: 'bold',
+  },
+};
 
 export default function AppNavigationStack() {
   const user = useContext(AWSUserContext);
@@ -19,15 +27,18 @@ export default function AppNavigationStack() {
 
   return (!subscribed) ? (
     <Stack.Navigator
-      initialRouteName="Landing"
+      initialRouteName="CommunityRules"
+      screenOptions={defaultScreenOptions}
     >
       <Stack.Screen
-        name="Home"
-        options={{ headerShown: false }}
-        component={HomeScreen}
+        name="CommunityRules"
+        component={CommunityRules}
+        options={{
+          title: 'Community Rules'
+        }}
       />
       <Stack.Screen
-        name="Landing"
+        name="Subscribe"
         options={{ headerShown: false }}
       >
         {() => <MembershipFee setSubscribed={setSubscribed} />}

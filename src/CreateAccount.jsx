@@ -45,15 +45,17 @@ export default function CreateAccount({ navigation }) {
             rules={{ required: true }}
             textContentType="emailAddress"
             autoCompleteType="email"
+            errorText="Email is required"
           />
           <Input
             control={control}
             errors={errors.password}
             name="password"
             placeholder="Choose password"
-            rules={{ required: true }}
+            rules={{ required: true, min: 6 }}
             textContentType="password"
             secureTextEntry
+            errorText="Password must be at least 8 characters"
           />    
         </View>
 
@@ -147,6 +149,7 @@ function HeaderTitle({ text, style }) {
 }
 
 function Input(props) {
+  const hasError = props.errors;
   return (
     <View style={{ flexDirection: 'column' }}>
       <Controller
@@ -158,8 +161,10 @@ function Input(props) {
               paddingBottom: 16,
               marginBottom: 6,
               fontSize: 16,
-              borderBottomColor: (props.error) ? 'red' : primary_color,
-              borderBottomWidth: 2
+              borderBottomColor: (hasError) ? 'red' : primary_color,
+              borderBottomWidth: 2,
+              borderColor: (hasError) ? 'red' : undefined,
+              borderWidth: (hasError) ? 2 : undefined
             }}
             placeholder={props.placeholder}
             placeholderTextColor="gray"
@@ -175,9 +180,9 @@ function Input(props) {
         rules={props.rules}
         defaultValue={props.defaultValue || ''}
       />
-      {props.error && (
+      {hasError && (
         <Text style={{ color: 'red', padding: 4 }}>
-          * {props.error}
+          * {props.errorText}
         </Text>
       )}
      </View>

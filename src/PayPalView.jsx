@@ -1,8 +1,8 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { WebView } from 'react-native-webview';
 import { API } from 'aws-amplify';
 import BGView from './BackgroundScreen';
-import { useEffect } from 'react';
+import Loader from './FullViewLoader';
 
 export default function PayPalSubscribeView(props) {
   const [url, setUrl] = useState('');
@@ -13,18 +13,20 @@ export default function PayPalSubscribeView(props) {
 
   return (
     <BGView contentStyle={{ alignSelf: 'stretch', flex: 1, backgroundColor: 'black' }}>
-      <WebView
-        source={{ uri: `${url}/subscribe` }}
-        style={{ flex: 1, backgroundColor: 'black' }}
-        onNavigationStateChange={(data) => {
-          if (data.title === 'cancelled') {
-            props.onCancel && props.onCancel(data);
-          } 
-          if (data.title === 'success') {
-            props.onSuccess && props.onSuccess(data);
-          }
-        }}
-      />
+      {(Boolean(url)) ? (
+        <WebView
+          source={{ uri: `${url}/subscribe` }}
+          style={{ flex: 1, backgroundColor: 'black' }}
+          onNavigationStateChange={(data) => {
+            if (data.title === 'cancelled') {
+              props.onCancel && props.onCancel(data);
+            } 
+            if (data.title === 'success') {
+              props.onSuccess && props.onSuccess(data);
+            }
+          }}
+        />
+      ) : <Loader size="large" color="#fff" />}
     </BGView>
   );
 }
