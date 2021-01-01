@@ -55,7 +55,7 @@ export default function CreateAccount({ navigation }) {
             rules={{ required: true, min: 6 }}
             textContentType="password"
             secureTextEntry
-            errorText="Password must be at least 8 characters"
+            errorText="Password must be at least 6 characters"
           />    
         </View>
 
