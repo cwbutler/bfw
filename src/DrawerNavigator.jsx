@@ -2,6 +2,7 @@ import React from 'react';
 import { createDrawerNavigator } from '@react-navigation/drawer';
 import HomeScreen from './HomeScreen';
 import DrawerContent from './DrawerContent';    
+import Settings from './Settings';
 import { primary_color } from './styles';
 
 const Drawer = createDrawerNavigator();
@@ -15,7 +16,7 @@ export default function DrawerNavigator() {
         headerStyle: {
           backgroundColor: primary_color,
         },
-        headerTintColor: 'black'
+        headerTintColor: 'white'
       }}
       drawerContent={DrawerContent}
       drawerStyle={{ backgroundColor: '#1d1d1f' }}
@@ -28,6 +29,10 @@ export default function DrawerNavigator() {
         name="Home" 
         component={HomeScreen} 
         options={{ headerTitleStyle: { display: 'none' } }}
+      />
+      <Drawer.Screen 
+        name="Settings" 
+        component={Settings}
       />
     </Drawer.Navigator>
   );
