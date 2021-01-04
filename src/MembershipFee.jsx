@@ -19,7 +19,7 @@ export default function MembershipFee(props) {
           await updateUserAttributes({ user, attributes: { 'custom:subscribed': '1' } })
           props.setSubscribed(true);
         }}
-        onCancel={() => navigation.replace('Landing')}
+        onCancel={() => navigation.replace('CommunityRules')}
       />
     </BGScreen>
   );
