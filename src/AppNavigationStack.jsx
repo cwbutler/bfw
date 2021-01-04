@@ -17,11 +17,11 @@ const defaultScreenOptions = {
 
 export default function AppNavigationStack() {
   const user = useContext(AWSUserContext);
-  const [subscribed, setSubscribed] = useState(true);
+  const [subscribed, setSubscribed] = useState(false);
 
   useEffect(() => {
     if (user?.attributes) {
-      //setSubscribed(Number(user.attributes['custom:subscribed']));
+      setSubscribed(Number(user.attributes['custom:subscribed']));
     }
   }, [user]);
 
