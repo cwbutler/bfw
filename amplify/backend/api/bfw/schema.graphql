@@ -17,6 +17,11 @@ type User @model
 
 type Mutation {
   createAppUser(input: UserInput): User @function(name: "bfwCreateUserResolver-${env}")
+  subscribeUser(input: SubscribeUserInput): Boolean @function(name: "bfwSubscribeUser-${env}")
+}
+
+input SubscribeUserInput {
+  email: String!
 }
 
 input UserInput {

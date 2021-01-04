@@ -21,6 +21,11 @@ export const createAppUser = /* GraphQL */ `
     }
   }
 `;
+export const subscribeUser = /* GraphQL */ `
+  mutation SubscribeUser($input: SubscribeUserInput) {
+    subscribeUser(input: $input)
+  }
+`;
 export const updateUser = /* GraphQL */ `
   mutation UpdateUser(
     $input: UpdateUserInput!

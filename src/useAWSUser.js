@@ -17,7 +17,7 @@ export function useAWSUser() {
   const [user, setUser] = useState({});
 
   useEffect(() => {
-    Auth.currentAuthenticatedUser()
+    Auth.currentAuthenticatedUser({ bypassCache: true })
       .then((result) => {
         result.Session = result.signInUserSession;
         setUser(result);

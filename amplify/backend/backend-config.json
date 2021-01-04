@@ -35,6 +35,20 @@
           ]
         }
       ]
+    },
+    "bfwSubscribeUser": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda",
+      "dependsOn": [
+        {
+          "category": "auth",
+          "resourceName": "bfwfc5bcfcd",
+          "attributes": [
+            "UserPoolId"
+          ]
+        }
+      ]
     }
   },
   "api": {
