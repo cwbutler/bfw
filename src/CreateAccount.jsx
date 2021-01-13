@@ -4,13 +4,13 @@ import { useForm, Controller } from "react-hook-form";
 import { createUser, signUp } from './api/auth';
 import BGScreen from './BackgroundScreen';
 import Loader from './FullViewLoader';
+import ErrorBox from './ErrorBox';
 import { primary_color } from './styles';
 
 export default function CreateAccount({ navigation }) {
   const { control, handleSubmit, errors } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState();
-  console.log(errors);
   const onSubmit = async input => {
     try {
       setServerError();
@@ -40,11 +40,7 @@ export default function CreateAccount({ navigation }) {
       {isLoading && <Loader size="large" />}
       <ScrollView>
         <HeaderTitle text="Create Account" />
-        {serverError && (
-          <View style={{ padding: 8, backgroundColor: 'red', borderRadius: 8, marginBottom: 8 }}>
-            <Text style={{ color: 'white', textAlign: 'center' }}>{serverError}</Text>
-          </View>
-        )}
+        <ErrorBox error={serverError} />
         <View style={{ marginBottom: 20 }}>
           <Input
             control={control}

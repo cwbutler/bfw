@@ -4,19 +4,23 @@ import { useForm, Controller } from "react-hook-form";
 import { Auth } from 'aws-amplify';
 import BGScreen from './BackgroundScreen';
 import Loader from './FullViewLoader';
+import Error from './ErrorBox';
 import { primary_color } from './styles';
 
 export default function SignIn({ navigation }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState();
   const { control, handleSubmit, errors } = useForm();
   const onSubmit = async ({ email, password }) => {
+    setServerError();
     setIsLoading(true);
+
     try {
       await Auth.signIn(email.toLowerCase(), password);
     } catch (e) {
-      if (e.code === 'UserNotConfirmedException') {
-        navigation.navigate('VerifyAccount', { email });
-      }
+      console.log(e);
+      setServerError(e.message);
+      setIsLoading(false);
     }
   };
 
@@ -50,6 +54,8 @@ export default function SignIn({ navigation }) {
           rules={{ required: true }}
           errorText="This is required"
         />
+
+        <Error error={serverError} containerStyle={{ marginTop: 8 }} />
       </View>
 
       <View style={{ flexDirection: 'column', padding: 10, }}>
