@@ -9,8 +9,11 @@ import { primary_color } from './styles';
 export default function CreateAccount({ navigation }) {
   const { control, handleSubmit, errors } = useForm();
   const [isLoading, setIsLoading] = useState(false);
+  const [serverError, setServerError] = useState();
+  console.log(errors);
   const onSubmit = async input => {
     try {
+      setServerError();
       setIsLoading(true);
       const dbUser = await createUser({
         ...input,
@@ -24,6 +27,7 @@ export default function CreateAccount({ navigation }) {
       navigation.navigate('VerifyAccount', { email: input.email });
     } catch (e) {
       console.log(e);
+      setServerError(e.message);
       setIsLoading(false);
     }
   };
@@ -36,6 +40,11 @@ export default function CreateAccount({ navigation }) {
       {isLoading && <Loader size="large" />}
       <ScrollView>
         <HeaderTitle text="Create Account" />
+        {serverError && (
+          <View style={{ padding: 8, backgroundColor: 'red', borderRadius: 8, marginBottom: 8 }}>
+            <Text style={{ color: 'white', textAlign: 'center' }}>{serverError}</Text>
+          </View>
+        )}
         <View style={{ marginBottom: 20 }}>
           <Input
             control={control}
@@ -52,7 +61,7 @@ export default function CreateAccount({ navigation }) {
             errors={errors.password}
             name="password"
             placeholder="Choose password"
-            rules={{ required: true, min: 6 }}
+            rules={{ required: true, minLength: 6 }}
             textContentType="password"
             secureTextEntry
             errorText="Password must be at least 6 characters"
@@ -121,7 +130,6 @@ export default function CreateAccount({ navigation }) {
             width: '100%' 
           }}
           onPress={handleSubmit(onSubmit)}
-          disabled={isLoading}
         >
           <Text style={{ color: 'white', fontSize: 16 }}>
             Create Account
