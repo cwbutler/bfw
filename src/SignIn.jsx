@@ -19,8 +19,11 @@ export default function SignIn({ navigation }) {
       await Auth.signIn(email.toLowerCase(), password);
     } catch (e) {
       console.log(e);
-      setServerError(e.message);
       setIsLoading(false);
+      if (e.code === 'UserNotConfirmedException') {
+        return navigation.navigate('VerifyAccount', { email });
+      }
+      setServerError(e.message);  
     }
   };
 

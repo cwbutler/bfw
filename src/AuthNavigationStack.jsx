@@ -46,6 +46,13 @@ export default function AuthNavigationStack() {
         component={SignUpNavigationStack}
         options={{ headerShown: false }}
       />
+      <Stack.Screen
+        name="VerifyAccount"
+        component={ConfirmUser}
+        options={{
+          title: 'Verify Account'
+        }}
+      />
     </Stack.Navigator>
   );
 }
