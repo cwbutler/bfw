@@ -1,0 +1,12 @@
+{
+  "permissions": {
+    "api": {
+      "bfw": [
+        "create",
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": []
+}
