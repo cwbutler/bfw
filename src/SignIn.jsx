@@ -16,7 +16,7 @@ export default function SignIn({ navigation }) {
     setIsLoading(true);
 
     try {
-      await Auth.signIn(email.toLowerCase(), password);
+      await Auth.signIn(email.toLowerCase().trim(), password);
     } catch (e) {
       console.log(e);
       setIsLoading(false);
