@@ -56,19 +56,19 @@
       "service": "Lambda",
       "dependsOn": [
         {
+          "category": "auth",
+          "resourceName": "bfwfc5bcfcd",
+          "attributes": [
+            "UserPoolId"
+          ]
+        },
+        {
           "category": "api",
           "resourceName": "bfw",
           "attributes": [
             "GraphQLAPIIdOutput",
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
-          ]
-        },
-        {
-          "category": "function",
-          "resourceName": "appsyncOperations",
-          "attributes": [
-            "Arn"
           ]
         }
       ]

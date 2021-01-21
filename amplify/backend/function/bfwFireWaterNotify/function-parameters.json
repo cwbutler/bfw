@@ -1,5 +1,11 @@
 {
   "permissions": {
+    "auth": {
+      "bfwfc5bcfcd": [
+        "read",
+        "update"
+      ]
+    },
     "api": {
       "bfw": [
         "create",
