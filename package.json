@@ -5,7 +5,8 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "web": "expo start --web",
-    "eject": "expo eject"
+    "eject": "expo eject",
+    "updateAppsyncOperations": "amplify codegen && babel ./graphql --config-file ./babel.config.json -d ./amplify/backend/function/appsyncOperations/opt/graphql/"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",
@@ -31,7 +32,9 @@
     "react-native-webview": "11.0.0"
   },
   "devDependencies": {
-    "@babel/core": "~7.9.0"
+    "@babel/cli": "^7.12.10",
+    "@babel/core": "^7.9.6",
+    "@babel/preset-env": "^7.12.11"
   },
   "private": true
 }

@@ -1,5 +1,8 @@
 type User @model
-  @auth(rules: [{ allow: public, provider: iam, operations: [create] }]) 
+  @auth(rules: [
+    { allow: private, provider: iam, operations: [create, read, update, delete] },
+    { allow: public, provider: iam, operations: [create] },
+  ]) 
 {
   id: ID!
   email: String
@@ -18,6 +21,7 @@ type User @model
 type Mutation {
   createAppUser(input: UserInput): User @function(name: "bfwCreateUserResolver-${env}")
   subscribeUser(input: SubscribeUserInput): Boolean @function(name: "bfwSubscribeUser-${env}")
+  batchUpdateUsers(input: [UpdateUserInput]): [User] @aws_iam @aws_cognito_user_pools
 }
 
 input SubscribeUserInput {
@@ -37,4 +41,21 @@ input UserInput {
   applePayId: String
   googlePayId: String
   avatar: String
+}
+
+input UpdateUserInput {
+  id: ID!
+  email: String
+  firstName: String
+  lastName: String
+  memberNumber: String
+  active: Boolean
+  subscriptionId: String
+  payPalId: String
+  cashAppId: String
+  applePayId: String
+  googlePayId: String
+  avatar: String
+  createdAt: String
+  updatedAt: String
 }

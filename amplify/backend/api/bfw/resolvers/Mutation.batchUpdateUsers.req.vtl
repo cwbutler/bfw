@@ -1,0 +1,15 @@
+#set($usersdata = [])
+#foreach($item in ${ctx.args.input})
+    $util.qr($item.put("createdAt", $util.defaultIfNullOrBlank($item.id, $util.time.nowISO8601())))
+    $util.qr($item.put("updatedAt", $util.time.nowISO8601()))
+    $util.qr($item.put("__typename", "User"))
+    $util.qr($item.put("id", $util.defaultIfNullOrBlank($item.id, $util.autoId())))
+    $util.qr($usersdata.add($util.dynamodb.toMapValues($item)))
+#end
+{
+  "version": "2018-05-29",
+  "operation": "BatchPutItem",
+  "tables": {
+      "User-r3h5azojtvecza2ui2w5vtjyiy-bfw": $utils.toJson($usersdata)
+  }
+}

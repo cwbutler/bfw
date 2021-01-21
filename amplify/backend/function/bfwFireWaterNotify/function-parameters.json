@@ -8,5 +8,11 @@
       ]
     }
   },
-  "lambdaLayers": []
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "appsyncOperations",
+      "version": 8
+    }
+  ]
 }

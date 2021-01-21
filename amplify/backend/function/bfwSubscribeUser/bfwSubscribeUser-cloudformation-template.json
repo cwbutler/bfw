@@ -76,7 +76,7 @@
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-bfw-bfw-83405-deployment",
-          "S3Key": "amplify-builds/bfwSubscribeUser-694d636c73714d705956-build.zip"
+          "S3Key": "amplify-builds/bfwSubscribeUser-61337845397657526f69-build.zip"
         }
       }
     },

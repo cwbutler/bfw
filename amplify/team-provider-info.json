@@ -14,6 +14,87 @@
     "categories": {
       "auth": {
         "bfwfc5bcfcd": {}
+      },
+      "function": {
+        "appsyncOperations": {
+          "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
+          "s3Key": "amplify-builds/appsyncOperations-build.zip"
+        }
+      }
+    },
+    "nonCFNdata": {
+      "function": {
+        "appsyncOperations": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "public"
+                },
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "HTZtI0Wgk547tFClTtb+L7TdJDLcCXqgc+yn+HcXt24="
+            },
+            "2": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "l2hpNNWtoEaKKIAW+JkcUJrG6h9QfazOb4NUAT5h1G8="
+            },
+            "3": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "LZWGq1orvehoNnEvmV+atkyFra4an0cm93ffQVVXTs4="
+            },
+            "4": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "gTdKSOyHnKQUWZpDaicokP9iyM1oJ+pxvwl0vFiU8uM="
+            },
+            "5": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "RjVgK8vIvxc56pUmSFboOf90k2g7J0ICLq7dCNR+6a4="
+            },
+            "6": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "klUBbroGHeqDFYPBCGM7Qboj2xo0zc03K7r7CJ+AJas="
+            },
+            "7": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "XBAffqjXoy4UF0lIQMPoNGnD7gbdfnwQdYuKd/j3oDo="
+            },
+            "8": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "Gq8HSmq6393W5XIKjaIy3R7v6rUvzSAWe6yMq6zKP6Q="
+            }
+          }
+        }
       }
     }
   }
