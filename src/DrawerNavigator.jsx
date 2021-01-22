@@ -33,7 +33,8 @@ export default function DrawerNavigator() {
       <Drawer.Screen 
         name="Settings" 
         component={Settings}
-      />
+        options={{ headerShown: false }}
+      />  
     </Drawer.Navigator>
   );
 }
