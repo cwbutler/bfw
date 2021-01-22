@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Pressable, Text, View } from 'react-native';
 import BGScreen from './BackgroundScreen';
 import { AntDesign } from '@expo/vector-icons';
+import { primary_color } from './styles';
 
 export default function FAQ() {
   return (
@@ -41,10 +42,12 @@ export default function FAQ() {
 function Accordion({ title, description, defaultIsOpen }) {
   const [isOpen, setIsOpen] = useState(defaultIsOpen);
   const iconName = (isOpen) ? 'caretup' : 'caretdown';
+  const titleBGColor = (isOpen) ? primary_color : 'white';
+  const titleFontColor = (isOpen) ? 'white' : 'black';
   return (
     <Pressable style={{ flexDirection: 'column', margin: 8 }} onPress={() => setIsOpen(!isOpen)}>
-      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: 'white', padding: 10  }}>
-        <Text style={{ fontSize: 16, flex: 1, paddingRight: 6 }}>{title}</Text>
+      <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', backgroundColor: titleBGColor, padding: 10  }}>
+        <Text style={{ fontSize: 16, flex: 1, paddingRight: 6, color: titleFontColor }}>{title}</Text>
         <AntDesign name={iconName} size={14} color="black" /> 
       </View>
       <View style={[{ display: 'none' }, isOpen && { display: 'flex' }]}>
