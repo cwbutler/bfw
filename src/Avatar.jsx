@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Image, Modal, Pressable, Text, View } from 'react-native';
 import defaultAvatar from '../assets/defaultProfile.png';
+import { saveProfileImage } from './api/auth';
 import Camera from './Camera';
 import { primary_color } from './styles';
+import { AWSUserContext } from './useAWSUser';
 
 export default function Avatar(props) {
+  const user = useContext(AWSUserContext);
   const [showCamera, setShowCamera] = useState(null); 
   const [image, setImage] = useState(defaultAvatar);
   const [tempImage, setTempImage] = useState();
@@ -25,6 +28,7 @@ export default function Avatar(props) {
   }
 
   function save() {
+    saveProfileImage({ user, image: tempImage });
     setImage({ uri: tempImage });
     setTempImage(undefined);
     setIsEditing(false);
@@ -81,8 +85,8 @@ export default function Avatar(props) {
           </View> 
           {showCamera && (
             <Camera 
-              onCapture={(photo) => {
-                setTempImage(photo.uri);
+              onCapture={async (photo) => {
+                setTempImage(await fetch(photo).blob());
                 setShowCamera(false);
               }} 
               close={() => setShowCamera(false)}

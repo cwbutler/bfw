@@ -1,0 +1,28 @@
+{
+  "permissions": {
+    "auth": {
+      "bfwfc5bcfcd": [
+        "read",
+        "update"
+      ]
+    },
+    "api": {
+      "bfw": [
+        "read",
+        "update"
+      ]
+    }
+  },
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "bfwLambdaUtils",
+      "version": 1
+    },
+    {
+      "type": "ProjectLayer",
+      "resourceName": "appsyncOperations",
+      "version": 8
+    }
+  ]
+}

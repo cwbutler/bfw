@@ -16,6 +16,10 @@ type User @model
   applePayId: String
   googlePayId: String
   avatar: String
+} 
+
+type Query {
+  listAppUsers(filter: String, limit: Int, nextToken: String): AppUserConnection @aws_cognito_user_pools @aws_iam @function(name: "bfwListUsersResolver-${env}")
 }
 
 type Mutation {
@@ -58,4 +62,31 @@ input UpdateUserInput {
   avatar: String
   createdAt: String
   updatedAt: String
+}
+
+type AppUserConnection @aws_cognito_user_pools @aws_iam {
+  items: [AppUser]
+  nextToken: String
+} 
+
+type AppUser {
+  id: ID!
+  sub: String
+  email: String
+  email_verified: String
+  profile: String
+  name: String
+  subscribed: String
+  given_name: String
+  family_name: String
+  memberNumber: String
+  enabled: Boolean
+  subscriptionId: String
+  payPalId: String
+  cashAppId: String
+  applePayId: String
+  googlePayId: String
+  status: String
+  createdAt: String
+  modifiedAt: String
 }
