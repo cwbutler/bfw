@@ -19,6 +19,10 @@
         "appsyncOperations": {
           "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
           "s3Key": "amplify-builds/appsyncOperations-build.zip"
+        },
+        "bfwLambdaUtils": {
+          "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
+          "s3Key": "amplify-builds/bfwLambdaUtils-build.zip"
         }
       }
     },
@@ -92,6 +96,18 @@
                 }
               ],
               "hash": "Gq8HSmq6393W5XIKjaIy3R7v6rUvzSAWe6yMq6zKP6Q="
+            }
+          }
+        },
+        "bfwLambdaUtils": {
+          "layerVersionMap": {
+            "1": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "nM6VsiNlbsKtyyf0SCt/n6iQF6SjsdW/vdz7b8g7w9w="
             }
           }
         }

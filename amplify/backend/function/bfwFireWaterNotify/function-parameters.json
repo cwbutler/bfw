@@ -17,6 +17,11 @@
   "lambdaLayers": [
     {
       "type": "ProjectLayer",
+      "resourceName": "bfwLambdaUtils",
+      "version": 1
+    },
+    {
+      "type": "ProjectLayer",
       "resourceName": "appsyncOperations",
       "version": 8
     }

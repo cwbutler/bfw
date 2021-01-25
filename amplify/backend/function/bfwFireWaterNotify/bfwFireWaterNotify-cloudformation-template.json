@@ -29,6 +29,10 @@
     "authbfwfc5bcfcdUserPoolId": {
       "Type": "String",
       "Default": "authbfwfc5bcfcdUserPoolId"
+    },
+    "functionbfwLambdaUtilsArn": {
+      "Type": "String",
+      "Default": "functionbfwLambdaUtilsArn"
     }
   },
   "Conditions": {
@@ -99,13 +103,16 @@
         "Runtime": "nodejs12.x",
         "Layers": [
           {
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:bfwLambdaUtils-bfw:1"
+          },
+          {
             "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:appsyncOperations-bfw:8"
           }
         ],
         "Timeout": "25",
         "Code": {
           "S3Bucket": "amplify-bfw-bfw-83405-deployment",
-          "S3Key": "amplify-builds/bfwFireWaterNotify-2f7a3641433475695a62-build.zip"
+          "S3Key": "amplify-builds/bfwFireWaterNotify-4f6a592b35615a4e4c47-build.zip"
         }
       }
     },

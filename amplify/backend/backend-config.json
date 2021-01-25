@@ -70,10 +70,29 @@
             "GraphQLAPIEndpointOutput",
             "GraphQLAPIKeyOutput"
           ]
+        },
+        {
+          "category": "function",
+          "resourceName": "appsyncOperations",
+          "attributes": [
+            "Arn"
+          ]
+        },
+        {
+          "category": "function",
+          "resourceName": "bfwLambdaUtils",
+          "attributes": [
+            "Arn"
+          ]
         }
       ]
     },
     "appsyncOperations": {
+      "providerPlugin": "awscloudformation",
+      "service": "LambdaLayer",
+      "build": true
+    },
+    "bfwLambdaUtils": {
       "providerPlugin": "awscloudformation",
       "service": "LambdaLayer",
       "build": true
