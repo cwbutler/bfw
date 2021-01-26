@@ -3,15 +3,21 @@ import * as mutations from "../../graphql/mutations";
 
 export async function signUp(input) {
   const email = input.email.toLowerCase().trim();
+  const given_name = input.firstName?.trim();
+  const family_name = input.lastName?.trim();
   const { user } = await Auth.signUp({
     username: email,
     password: input.password,
     attributes: {
       email,
-      name: `${input.firstName} ${input.lastName}`,
-      given_name: input.firstName,
-      family_name: input.lastName,
-      profile: input.profile
+      name: (given_name || firstName) ? `${given_name} ${family_name}`.trim() : undefined,
+      given_name,
+      family_name,
+      profile: input.profile,
+      'custom:applePayId': input.applePayId?.trim(),
+      'custom:cashAppId': input.cashAppId?.trim(),
+      'custom:googlePayId': input.googlePayId?.trim(),
+      'custom:payPalId': input.payPalId?.trim()
     }
   });
   return user;

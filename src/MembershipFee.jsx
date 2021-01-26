@@ -1,4 +1,4 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { updateUserAttributes } from './api/auth';
 import { useNavigation } from '@react-navigation/native';
 import BGScreen from './BackgroundScreen';

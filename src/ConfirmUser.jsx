@@ -5,17 +5,17 @@ import BGView from './BackgroundScreen';
 import { confirmUser } from './api/auth';
 import Loader from './FullViewLoader';
 import { primary_color } from './styles';
+import { Auth } from 'aws-amplify';
 
 export default function ConfirmUser(props) {
   const [code, setCode] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  const [resent, setResent] = useState(false);
+  const email = props.route.params.email;
 
   async function onSubmit() {
     setIsLoading(true);
-    await confirmUser({
-      email: props.route.params.email,
-      code
-    });
+    await confirmUser({ email, code });
     props.navigation.navigate('Login');
   } 
 
@@ -49,6 +49,24 @@ export default function ConfirmUser(props) {
         >
           <Text style={{ fontSize: 18 }}>Submit</Text>
         </Pressable>
+
+        <Pressable
+          style={{ marginTop: 35 }}
+          onPress={async () => {
+            await Auth.resendSignUp(email.toLowerCase().trim());
+            setResent(true);
+          }}
+        >
+          <Text style={{ fontSize: 18, color: 'white' }}>Resend Code</Text>
+        </Pressable>
+
+        {resent && (
+          <View style={{ marginTop: 20 }}>
+            <Text style={{ color: primary_color }}>
+              Resent! Please check email for code.
+            </Text>
+          </View>
+        )}
       </View>
     </BGView>
   );

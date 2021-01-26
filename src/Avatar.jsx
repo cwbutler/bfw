@@ -27,7 +27,7 @@ export default function Avatar(props) {
     setShowCamera(false);
   }
 
-  function save() {
+  async function save() {
     saveProfileImage({ user, image: tempImage });
     setImage({ uri: tempImage });
     setTempImage(undefined);
@@ -86,7 +86,7 @@ export default function Avatar(props) {
           {showCamera && (
             <Camera 
               onCapture={async (photo) => {
-                setTempImage(await fetch(photo).blob());
+                setTempImage(photo.uri);
                 setShowCamera(false);
               }} 
               close={() => setShowCamera(false)}

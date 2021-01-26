@@ -4,6 +4,7 @@ import { AWSUserContext } from './useAWSUser';
 import DrawerNavigator from './DrawerNavigator';
 import MembershipFee from './MembershipFee';
 import CommunityRules from './CommunityRules';
+import useNotifications from './useNotification';
 import { primary_color } from './styles';
 
 const Stack = createStackNavigator();
@@ -23,7 +24,9 @@ export default function AppNavigationStack() {
     if (user?.attributes) {
       setSubscribed(Number(user.attributes['custom:subscribed']));
     }
-  }, [user]);
+  }, []);
+
+  useNotifications();
 
   return (!subscribed) ? (
     <Stack.Navigator

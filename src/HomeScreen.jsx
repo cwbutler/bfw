@@ -7,6 +7,7 @@ import Avatar from './Avatar';
 export default function HomeScreen() {
   const user = useContext(AWSUserContext);
   const hasName = Boolean(user?.attributes?.name?.trim());
+
   return (
     <BGView statusBarStyle="dark-content">
       <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
@@ -16,7 +17,7 @@ export default function HomeScreen() {
           {(hasName) ? user.attributes.name : user?.attributes?.email}
         </Text>
         <Text style={{ color: 'white', fontSize: 16, marginTop: 8 }}>
-          Community #TBD
+          Community #{user?.attributes['custom:memberNumber'] || 'TBD'}
         </Text>
       </View>
 

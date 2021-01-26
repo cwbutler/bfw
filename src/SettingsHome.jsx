@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Pressable, Switch, Text, View } from 'react-native';
-import { Link } from '@react-navigation/native';
 import BGScreen from './BackgroundScreen';
 import { primary_color } from './styles';
 import config from '../app.json';
+import { registerForPushNotificationsAsync } from './utils';
+import * as Notifications from 'expo-notifications';
 
 export default function SettingsHome({ navigation }) {
+  const [notifStatus, setNotifStatus] = useState();
+  useEffect(() => {
+    Notifications.getPermissionsAsync()
+      .then(({ status }) => {
+        setNotifStatus(status);
+      });
+  }, []);
+
   return (
     <BGScreen contentStyle={{ backgroundColor: 'lightgray' }}>
       <Text style={{ padding: 10 }}>GENERAL</Text>
@@ -17,16 +26,17 @@ export default function SettingsHome({ navigation }) {
         <ListItem>
           <ListLabel>Edit Payment Info</ListLabel>
         </ListItem>
-        {/*<ListItem>
+        <ListItem>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
             <ListLabel>Notification</ListLabel>
             <Switch
               trackColor={{ false: '#000', true: primary_color }}
               ios_backgroundColor="#000"
-              value={false}
+              value={notifStatus === 'granted'}
+              onPress={async () => await registerForPushNotificationsAsync()}
             />
           </View>
-        </ListItem>*/}
+        </ListItem>
         <ListItem onPress={() => navigation.navigate('FAQ')}>
           <ListLabel>FAQ</ListLabel>
           <ListLabelSubtitle>

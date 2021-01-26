@@ -1,6 +1,7 @@
 import React from 'react';
+import { Pressable } from 'react-native';
+import { Ionicons } from '@expo/vector-icons';
 import FAQ from './FAQ';
-
 import { createStackNavigator } from '@react-navigation/stack';
 import SettingsHome from './SettingsHome';
 import { primary_color } from './styles';
@@ -14,7 +15,7 @@ const defaultScreenOptions = {
   headerTintColor: 'white'
 };
 
-export default function SettingsNavigationStack() {
+export default function SettingsNavigationStack(props) {
   return (
     <Stack.Navigator
       initialRouteName="SettingsHome"
@@ -24,7 +25,12 @@ export default function SettingsNavigationStack() {
         name="SettingsHome"
         component={SettingsHome}
         options={{
-          title: 'Settings'
+          title: 'Settings',
+          headerLeft: () => (
+            <Pressable style={{ marginLeft: 15 }} onPress={() => props.navigation.toggleDrawer()}>
+              <Ionicons name="md-menu" size={24} color="white" />
+            </Pressable>
+          )
         }}
       />
       <Stack.Screen
