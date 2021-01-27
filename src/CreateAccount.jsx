@@ -6,6 +6,7 @@ import { signUp, updateUserAttributes } from './api/auth';
 import BGScreen from './BackgroundScreen';
 import Loader from './FullViewLoader';
 import ErrorBox from './ErrorBox';
+import getInputClass from './inputs';
 import { AWSUserContext } from './useAWSUser';
 import { primary_color } from './styles';
 
@@ -62,9 +63,6 @@ export default function CreateAccount({ navigation, ...props }) {
               name="email"
               placeholder="Email address"
               rules={{ required: true }}
-              textContentType="emailAddress"
-              autoCompleteType="email"
-              autoCapitalize="none"
               errorText="Email is required"
             />
             <Input
@@ -73,8 +71,6 @@ export default function CreateAccount({ navigation, ...props }) {
               name="password"
               placeholder="Choose password"
               rules={{ required: true, minLength: 6 }}
-              textContentType="password"
-              secureTextEntry
               errorText="Password must be at least 6 characters"
             />    
           </View>
@@ -176,13 +172,16 @@ function HeaderTitle({ text, style }) {
 
 export function Input(props) {
   const hasError = props.errors;
+  const InputComponent = getInputClass(props.name);
+
   return (
     <View style={[{ flexDirection: 'column' }, props.containerStyle]}>
       <Controller
         control={props.control}
         render={({ onChange, onBlur, value }) => (
-          <TextInput
+          <InputComponent
             style={[{
+              backgroundColor: '#fefefe',
               padding: 10,
               paddingBottom: 16,
               marginBottom: 6,
@@ -197,11 +196,6 @@ export function Input(props) {
             onBlur={onBlur}
             onChangeText={text => onChange(text)}
             value={value}
-            secureTextEntry={props.secureTextEntry}
-            textContentType={props.textContentType}
-            keyboardType={props.keyboardType}
-            autoCompleteType={props.autoCompleteType}
-            autoCapitalize={props.autoCapitalize}
           />
         )}
         name={props.name}

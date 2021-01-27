@@ -3,6 +3,7 @@ import { Pressable, Text, TextInput, KeyboardAvoidingView, Platform, View } from
 import { Auth } from 'aws-amplify';
 import { useForm, Controller } from "react-hook-form";
 import BGScreen from './BackgroundScreen';
+import EmailInput from './inputs/Email';
 import { primary_color } from './styles';
 
 export default function ForgotPassword({ navigation }) {
@@ -51,14 +52,10 @@ export default function ForgotPassword({ navigation }) {
         <Controller
           control={control}
           render={({ onChange, onBlur, value }) => (
-            <TextInput
+            <EmailInput
               style={{ borderWidth: 1, borderColor: primary_color, borderRadius: 10, padding: 10, margin: 6, textAlign: 'center', fontSize: 18, alignSelf: 'stretch', color: 'white', fontWeight: 'bold' }}
               placeholder="Enter email"
               placeholderTextColor="gray"
-              autoCapitalize="none"
-              autoCompleteType="email"
-              keyboardType="email-address"
-              textContentType="emailAddress"
               onChangeText={text => onChange(text)}
               onBlur={onBlur}
               value={value}

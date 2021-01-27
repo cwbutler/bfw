@@ -5,6 +5,7 @@ import { Auth } from 'aws-amplify';
 import BGScreen from './BackgroundScreen';
 import Loader from './FullViewLoader';
 import Error from './ErrorBox';
+import getInputClass from './inputs';
 import { primary_color } from './styles';
 
 export default function SignIn({ navigation }) {
@@ -100,14 +101,14 @@ export default function SignIn({ navigation }) {
 
 function Input(props) {
   const hasError = props.errors;
-  const isPassword = props.name === 'password';
+  const InputComponent = getInputClass(props.name);
 
   return (
      <View style={{ flexDirection: 'column', padding: 4 }}>
       <Controller
         control={props.control}
         render={({ onChange, onBlur, value }) => (
-          <TextInput
+          <InputComponent
             style={{
               backgroundColor: 'white',
               paddingLeft: 8,
@@ -124,9 +125,6 @@ function Input(props) {
             onBlur={onBlur}
             onChangeText={text => onChange(text)}
             value={value}
-            secureTextEntry={isPassword}
-            textContentType={(isPassword) ? 'password' : 'emailAddress'}
-            autoCompleteType={(isPassword) ? 'password' : 'email'}
           />
         )}
         name={props.name}
