@@ -4,6 +4,7 @@ import Landing from './Landing';
 import Login from './SignIn';
 import CreateAccount from './CreateAccount';
 import ConfirmUser from './ConfirmUser';
+import ForgotPassword from './ForgotPassword';
 import { primary_color } from './styles';
 
 const Stack = createStackNavigator();
@@ -51,6 +52,13 @@ export default function AuthNavigationStack() {
         component={ConfirmUser}
         options={{
           title: 'Verify Account'
+        }}
+      />
+      <Stack.Screen
+        name="ForgotPassword"
+        component={ForgotPassword}
+        options={{
+          title: 'Reset Password'
         }}
       />
     </Stack.Navigator>

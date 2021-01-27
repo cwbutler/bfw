@@ -76,6 +76,19 @@ export default function SignIn({ navigation }) {
             Sign In
           </Text>
         </Pressable>
+        <Pressable
+          style={{
+            borderRadius: 18,
+            padding: 12,
+            alignItems: 'center',
+            marginBottom: 8
+          }}
+          onPress={() => navigation.navigate('ForgotPassword')}
+        >
+          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>
+            Forgot Password?
+          </Text>
+        </Pressable>
 
         <Text style={{ fontSize: 12, color: 'gray', textAlign: 'center' }}>
           By proceeding you also agree to the Terms of Service and Privacy Policy

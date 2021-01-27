@@ -152,15 +152,15 @@ function HeaderTitle({ text, style }) {
   )
 }
 
-function Input(props) {
+export function Input(props) {
   const hasError = props.errors;
   return (
-    <View style={{ flexDirection: 'column' }}>
+    <View style={[{ flexDirection: 'column' }, props.containerStyle]}>
       <Controller
         control={props.control}
         render={({ onChange, onBlur, value }) => (
           <TextInput
-            style={{
+            style={[{
               padding: 10,
               paddingBottom: 16,
               marginBottom: 6,
@@ -169,7 +169,7 @@ function Input(props) {
               borderBottomWidth: 2,
               borderColor: (hasError) ? 'red' : undefined,
               borderWidth: (hasError) ? 2 : undefined
-            }}
+            }, props.inputStyle]}
             placeholder={props.placeholder}
             placeholderTextColor="gray"
             onBlur={onBlur}
