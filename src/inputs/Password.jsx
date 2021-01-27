@@ -24,10 +24,13 @@ export default function PasswordInput(props) {
         style={[{ flex: 1 }, props.style]}
       />
       <Pressable 
-        style={{ padding: 10, position: 'absolute', right: 0, height: '100%', justifyContent: 'center' }}
+        style={[
+          { padding: 10, position: 'absolute', right: 0, height: '100%', justifyContent: 'center' },
+          props.showBtnStyle
+        ]}
         onPress={() => setShowPassword(!showPassword)}
       >
-        <Text style={{ color: 'black', fontSize: 12 }}>
+        <Text style={[{ color: 'black', fontSize: 12 }, props.btnTextStyle]}>
           {(showPassword) ? 'Hide' : 'Show'}
         </Text>
       </Pressable>

@@ -4,6 +4,7 @@ import { Auth } from 'aws-amplify';
 import { useForm, Controller } from "react-hook-form";
 import BGScreen from './BackgroundScreen';
 import EmailInput from './inputs/Email';
+import PasswordInput from './inputs/Password';
 import { primary_color } from './styles';
 
 export default function ForgotPassword({ navigation }) {
@@ -91,17 +92,15 @@ export default function ForgotPassword({ navigation }) {
             <Controller
               control={control}
               render={({ onChange, onBlur, value }) => (
-                <TextInput
-                  style={{ borderWidth: 1, borderColor: primary_color, borderRadius: 10, padding: 10, margin: 6, textAlign: 'center', fontSize: 18, alignSelf: 'stretch', color: 'white', fontWeight: 'bold' }}
+                <PasswordInput
+                  style={{ backgroundColor: 'black', borderWidth: 1, borderColor: primary_color, borderRadius: 10, padding: 10, margin: 6, textAlign: 'center', fontSize: 18, alignSelf: 'stretch', color: 'white', fontWeight: 'bold' }}
+                  showBtnStyle={{ right: 10 }}
+                  btnTextStyle={{ color: 'white' }}
                   placeholder="New Password"
                   placeholderTextColor="gray"
-                  autoCapitalize="none"
-                  autoCompleteType="off"
-                  textContentType="password"
                   onChangeText={text => onChange(text)}
                   onBlur={onBlur}
                   value={value}
-                  secureTextEntry
                 />
               )}
               name="password"
