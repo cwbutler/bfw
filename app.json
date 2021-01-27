@@ -2,7 +2,7 @@
   "expo": {
     "name": "Black Family Wealth",
     "slug": "bfw",
-    "version": "0.1.8",
+    "version": "0.1.9",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "splash": {

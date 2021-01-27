@@ -4,6 +4,7 @@ import { AWSUserContext } from './useAWSUser';
 import DrawerNavigator from './DrawerNavigator';
 import MembershipFee from './MembershipFee';
 import CommunityRules from './CommunityRules';
+import Welcome from './Welcome';
 import useNotifications from './useNotification';
 import { primary_color } from './styles';
 
@@ -30,9 +31,14 @@ export default function AppNavigationStack() {
 
   return (!subscribed) ? (
     <Stack.Navigator
-      initialRouteName="CommunityRules"
+      initialRouteName="Welcome"
       screenOptions={defaultScreenOptions}
     >
+      <Stack.Screen
+        name="Welcome"
+        component={Welcome}
+        options={{ headerShown: false }}
+      />
       <Stack.Screen
         name="CommunityRules"
         component={CommunityRules}

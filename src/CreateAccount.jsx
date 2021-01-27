@@ -23,8 +23,9 @@ export default function CreateAccount({ navigation, ...props }) {
         await updateUserAttributes({
           user, 
           attributes: {
-            given_name: input.firstName,
-            family_name: input.lastName,
+            given_name: input.firstName.trim(),
+            family_name: input.lastName.trim(),
+            name: `${input.firstName} ${input.lastName}`.trim(),
             'custom:googlePayId': input.googlePayId,
             'custom:applePayId': input.applePayId,
             'custom:cashAppId': input.cashAppId,

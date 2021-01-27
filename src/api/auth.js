@@ -44,8 +44,11 @@ export async function updateUserAttributes({ user, attributes }) {
 }
 
 export async function saveProfileImage({ user, image }) {
-  console.log(image)
-  //await Storage.put(`user/avatar/${user.attributes.sub}`, image);
-  //const data = await Auth.updateUserAttributes(user, attributes);
+  const response = await fetch(image);
+  const blob = await response.blob();
+  const { key: picture } = await Storage.put(`user/avatar/${user.attributes.sub}`, blob);
+
+  await updateUserAttributes({ user, attributes: { picture } });
+  user.refresh();
   return;
 }

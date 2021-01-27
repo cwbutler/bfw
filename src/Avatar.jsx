@@ -1,15 +1,16 @@
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, Modal, Pressable, Text, View } from 'react-native';
+import * as ImagePicker from 'expo-image-picker';
+import { Storage } from 'aws-amplify';
 import defaultAvatar from '../assets/defaultProfile.png';
 import { saveProfileImage } from './api/auth';
-import Camera from './Camera';
 import { primary_color } from './styles';
 import { AWSUserContext } from './useAWSUser';
 
 export default function Avatar(props) {
   const user = useContext(AWSUserContext);
-  const [showCamera, setShowCamera] = useState(null); 
-  const [image, setImage] = useState(defaultAvatar);
+  const defaultImage = (user?.attributes?.picture) ? { uri: user.attributes.picture } : defaultAvatar;
+  const [image, setImage] = useState(defaultImage);
   const [tempImage, setTempImage] = useState();
   const [isEditing, setIsEditing] = useState(false);
   const source = (tempImage) ? { uri: tempImage } : image;
@@ -24,8 +25,7 @@ export default function Avatar(props) {
   function cancel() {
     setTempImage(undefined);
     setIsEditing(false);
-    setShowCamera(false);
-  }
+  } 
 
   async function save() {
     saveProfileImage({ user, image: tempImage });
@@ -33,6 +33,53 @@ export default function Avatar(props) {
     setTempImage(undefined);
     setIsEditing(false);
   }
+
+  useEffect(() => {
+    if (user?.attributes?.picture) {
+      Storage.get(user?.attributes?.picture)
+        .then((uri) => setImage({ uri }))
+    }
+  }, [user]);
+
+  const takePicture = async () => {
+    if (Platform.OS !== 'web') {
+      const { status } = await ImagePicker.requestCameraPermissionsAsync();
+      if (status !== 'granted') {
+        return alert('Sorry, we need camera permissions to make this work!');
+      }
+    }
+
+    const result = await ImagePicker.launchCameraAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setTempImage(result.uri);
+    }
+  };
+
+  const pickImage = async () => {
+    if (Platform.OS !== 'web') {
+      const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+      if (status !== 'granted') {
+        return alert('Sorry, we need camera roll permissions to make this work!');
+      }
+    }
+
+    const result = await ImagePicker.launchImageLibraryAsync({
+      mediaTypes: ImagePicker.MediaTypeOptions.Images,
+      allowsEditing: true,
+      aspect: [4, 3],
+      quality: 1,
+    });
+
+    if (!result.cancelled) {
+      setTempImage(result.uri);
+    }
+  };
 
   return (
     <View style={[containerStyle, props.style]}>
@@ -57,11 +104,14 @@ export default function Avatar(props) {
               <View style={{ flexDirection: 'column' }}>
                 <Pressable 
                   style={{ backgroundColor: primary_color, padding: 10, borderRadius: 12, width: 180, margin: 8 }}
-                  onPress={() => setShowCamera(true)}
+                  onPress={takePicture}
                 >
                   <Text style={{ textAlign: 'center', color: 'white', fontSize: 16 }}>Take a Photo</Text>
                 </Pressable>
-                <Pressable style={{ backgroundColor: primary_color, padding: 10, borderRadius: 12, width: 180, margin: 8 }}>
+                <Pressable 
+                  onPress={pickImage}
+                  style={{ backgroundColor: primary_color, padding: 10, borderRadius: 12, width: 180, margin: 8 }}
+                >
                   <Text style={{ textAlign: 'center', color: 'white', fontSize: 16 }}>Choose a Photo</Text>
                 </Pressable>
 
@@ -83,15 +133,6 @@ export default function Avatar(props) {
               </View>
             </View>
           </View> 
-          {showCamera && (
-            <Camera 
-              onCapture={async (photo) => {
-                setTempImage(photo.uri);
-                setShowCamera(false);
-              }} 
-              close={() => setShowCamera(false)}
-            />
-          )}
         </Modal>
       </Pressable>
     </View>
