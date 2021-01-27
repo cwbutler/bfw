@@ -13,7 +13,6 @@ export async function signUp(input) {
       name: (given_name || firstName) ? `${given_name} ${family_name}`.trim() : undefined,
       given_name,
       family_name,
-      profile: input.profile,
       'custom:applePayId': input.applePayId?.trim(),
       'custom:cashAppId': input.cashAppId?.trim(),
       'custom:googlePayId': input.googlePayId?.trim(),

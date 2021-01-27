@@ -17,11 +17,11 @@ export default function HomeScreen() {
           {(hasName) ? user.attributes.name : user?.attributes?.email}
         </Text>
         <Text style={{ color: 'white', fontSize: 16, marginTop: 8 }}>
-          Community #{user?.attributes['custom:memberNumber'] || 'TBD'}
+          #{user?.attributes['custom:memberNumber'] || 'TBD'}
         </Text>
       </View>
 
-      <View style={{ flexDirection: 'row', justifyContent: 'center', padding: 10 }}>
+      <View style={{ backgroundColor: '#1c1c1c', flexDirection: 'row', justifyContent: 'center', padding: 12, margin: 20 }}>
         <View style={{ flexDirection: 'column', alignItems: 'center', padding: 8 }}>
           <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Your Next</Text>
           <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Water:</Text>

@@ -64,6 +64,7 @@ export default function CreateAccount({ navigation, ...props }) {
               rules={{ required: true }}
               textContentType="emailAddress"
               autoCompleteType="email"
+              autoCapitalize="none"
               errorText="Email is required"
             />
             <Input
@@ -113,28 +114,28 @@ export default function CreateAccount({ navigation, ...props }) {
             errors={errors.paypal}
             name="payPalId"
             placeholder="PayPal"
-            defaultValue={user?.attributes['custom:payPalId']}
+            defaultValue={user?.attributes ? user?.attributes['custom:payPalId'] : ''}
           />
           <Input
             control={control}
             errors={errors.cashApp}
             name="cashAppId"
             placeholder="Cash App"
-            defaultValue={user?.attributes['custom:cashAppId']}
+            defaultValue={user?.attributes ? user?.attributes['custom:cashAppId'] : ''}
           />
           <Input
             control={control}
             errors={errors.applePay}
             name="applePayId"
             placeholder="Apple Pay"
-            defaultValue={user?.attributes['custom:applePayId']}
+            defaultValue={user?.attributes ? user?.attributes['custom:applePayId'] : ''}
           />
           <Input
             control={control}
             errors={errors.androidPay}
             name="googlePayId"
             placeholder="Android Pay"
-            defaultValue={user?.attributes['custom:googlePayId']}
+            defaultValue={user?.attributes ? user?.attributes['custom:googlePayId'] : ''}
           />
         </View>
 
@@ -198,7 +199,9 @@ export function Input(props) {
             value={value}
             secureTextEntry={props.secureTextEntry}
             textContentType={props.textContentType}
+            keyboardType={props.keyboardType}
             autoCompleteType={props.autoCompleteType}
+            autoCapitalize={props.autoCapitalize}
           />
         )}
         name={props.name}
