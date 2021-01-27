@@ -1,33 +1,45 @@
-import React, { useState } from 'react';
+import React, { useContext, useState } from 'react';
 import { Text, TextInput, ScrollView, View, Pressable } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
-import { createUser, signUp } from './api/auth';
+import { Auth } from 'aws-amplify';
+import { signUp, updateUserAttributes } from './api/auth';
 import BGScreen from './BackgroundScreen';
 import Loader from './FullViewLoader';
 import ErrorBox from './ErrorBox';
+import { AWSUserContext } from './useAWSUser';
 import { primary_color } from './styles';
 
-export default function CreateAccount({ navigation }) {
+export default function CreateAccount({ navigation, ...props }) {
   const { control, handleSubmit, errors } = useForm();
   const [isLoading, setIsLoading] = useState(false);
   const [serverError, setServerError] = useState();
+  const user = useContext(AWSUserContext);
+
   const onSubmit = async input => {
     try {
       setServerError();
       setIsLoading(true);
-      const dbUser = await createUser({
-        ...input,
-        password: undefined
-      });
-
-      // Save ref to profile in db.
-      input.profile = dbUser.id;
-
-      await signUp(input);
-      navigation.navigate('VerifyAccount', { email: input.email });
+      if (props.editUser) {
+        await updateUserAttributes({
+          user, 
+          attributes: {
+            given_name: input.firstName,
+            family_name: input.lastName,
+            'custom:googlePayId': input.googlePayId,
+            'custom:applePayId': input.applePayId,
+            'custom:cashAppId': input.cashAppId,
+            'custom:payPalId': input.payPalId
+          }
+        });
+        user.setUser(await Auth.currentAuthenticatedUser({ bypassCache: true }));
+      } else {
+        await signUp(input);
+        navigation.navigate('VerifyAccount', { email: input.email });
+      }
     } catch (e) {
       console.log(e);
       setServerError(e.message);
+    } finally {
       setIsLoading(false);
     }
   };
@@ -39,30 +51,32 @@ export default function CreateAccount({ navigation }) {
     >
       {isLoading && <Loader size="large" />}
       <ScrollView>
-        <HeaderTitle text="Create Account" />
-        <ErrorBox error={serverError} />
-        <View style={{ marginBottom: 20 }}>
-          <Input
-            control={control}
-            errors={errors.email}
-            name="email"
-            placeholder="Email address"
-            rules={{ required: true }}
-            textContentType="emailAddress"
-            autoCompleteType="email"
-            errorText="Email is required"
-          />
-          <Input
-            control={control}
-            errors={errors.password}
-            name="password"
-            placeholder="Choose password"
-            rules={{ required: true, minLength: 6 }}
-            textContentType="password"
-            secureTextEntry
-            errorText="Password must be at least 6 characters"
-          />    
-        </View>
+        {!(props.editUser) && (<>
+          <HeaderTitle text="Create Account" />
+          <ErrorBox error={serverError} />
+          <View style={{ marginBottom: 20 }}>
+            <Input
+              control={control}
+              errors={errors.email}
+              name="email"
+              placeholder="Email address"
+              rules={{ required: true }}
+              textContentType="emailAddress"
+              autoCompleteType="email"
+              errorText="Email is required"
+            />
+            <Input
+              control={control}
+              errors={errors.password}
+              name="password"
+              placeholder="Choose password"
+              rules={{ required: true, minLength: 6 }}
+              textContentType="password"
+              secureTextEntry
+              errorText="Password must be at least 6 characters"
+            />    
+          </View>
+        </>)}
 
         <HeaderTitle text="Personal Information" />
 
@@ -74,6 +88,7 @@ export default function CreateAccount({ navigation }) {
             placeholder="First name"
             textContentType="name"
             autoCompleteType="name"
+            defaultValue={user?.attributes?.given_name}
           />
           <Input
             control={control}
@@ -82,6 +97,7 @@ export default function CreateAccount({ navigation }) {
             placeholder="Last name"
             textContentType="familyName"
             autoCompleteType="name"
+            defaultValue={user?.attributes?.family_name}
           />
           {/*<Input
             control={control}
@@ -96,24 +112,28 @@ export default function CreateAccount({ navigation }) {
             errors={errors.paypal}
             name="payPalId"
             placeholder="PayPal"
+            defaultValue={user?.attributes['custom:payPalId']}
           />
           <Input
             control={control}
             errors={errors.cashApp}
             name="cashAppId"
             placeholder="Cash App"
+            defaultValue={user?.attributes['custom:cashAppId']}
           />
           <Input
             control={control}
             errors={errors.applePay}
             name="applePayId"
             placeholder="Apple Pay"
+            defaultValue={user?.attributes['custom:applePayId']}
           />
           <Input
             control={control}
             errors={errors.androidPay}
             name="googlePayId"
             placeholder="Android Pay"
+            defaultValue={user?.attributes['custom:googlePayId']}
           />
         </View>
 
@@ -128,7 +148,7 @@ export default function CreateAccount({ navigation }) {
           onPress={handleSubmit(onSubmit)}
         >
           <Text style={{ color: 'white', fontSize: 16 }}>
-            Create Account
+            {props.editUser ? 'Update Info' : 'Create Account'}
           </Text>
         </Pressable>
       </ScrollView>

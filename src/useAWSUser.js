@@ -15,6 +15,7 @@ export default function AWSUserProvider(props) {
 
 export function useAWSUser() {
   const [user, setUser] = useState({});
+  user.setUser = setUser;
 
   useEffect(() => {
     Auth.currentAuthenticatedUser({ bypassCache: true })
@@ -28,7 +29,7 @@ export function useAWSUser() {
       switch (data.payload.event) {
         case 'signIn':
           console.info('user signed in', data);
-          setUser(await Auth.currentAuthenticatedUser());
+          setUser(await Auth.currentAuthenticatedUser({ bypassCache: true }));
           break;
         case 'signOut':
           console.info('user signed out', data);

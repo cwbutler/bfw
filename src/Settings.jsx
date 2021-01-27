@@ -2,6 +2,7 @@ import React from 'react';
 import { Pressable } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import FAQ from './FAQ';
+import EditAccount from './CreateAccount';
 import { createStackNavigator } from '@react-navigation/stack';
 import SettingsHome from './SettingsHome';
 import { primary_color } from './styles';
@@ -37,6 +38,12 @@ export default function SettingsNavigationStack(props) {
         name="FAQ"
         component={FAQ}
       />
+      <Stack.Screen
+        name="EditUser"
+        options={{ title: 'Edit User Info' }}
+      >
+        {x => <EditAccount {...x} editUser />}
+      </Stack.Screen> 
     </Stack.Navigator>
   );
 }

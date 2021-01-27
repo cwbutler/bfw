@@ -20,11 +20,8 @@ export default function SettingsHome({ navigation }) {
       <Text style={{ padding: 10 }}>GENERAL</Text>
 
       <View>
-        <ListItem>
+        <ListItem onPress={() => navigation.navigate('EditUser')}>
           <ListLabel>Edit User Info</ListLabel>
-        </ListItem>
-        <ListItem>
-          <ListLabel>Edit Payment Info</ListLabel>
         </ListItem>
         <ListItem>
           <View style={{ flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between' }}>
