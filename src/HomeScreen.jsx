@@ -1,8 +1,10 @@
 import React, { useContext } from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ImageBackground } from 'react-native';
 import { AWSUserContext } from './useAWSUser';
 import BGView from './BackgroundScreen';
 import Avatar from './Avatar';
+import fireImage from '../assets/fire.png';
+import waterImage from '../assets/water.png';
 
 export default function HomeScreen() {
   const user = useContext(AWSUserContext);
@@ -21,16 +23,24 @@ export default function HomeScreen() {
         </Text>
       </View>
 
-      <View style={{ backgroundColor: '#1c1c1c', flexDirection: 'row', justifyContent: 'center', padding: 12, margin: 20 }}>
-        <View style={{ flexDirection: 'column', alignItems: 'center', padding: 8 }}>
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Your Next</Text>
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Water:</Text>
-          <Text style={{ color: 'white', fontSize: 16 }}>TBD</Text>
+      <View style={{ backgroundColor: '#1c1c1c', flexDirection: 'row', justifyContent: 'center', margin: 20 }}>
+        <View style={{ flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+          <ImageBackground source={waterImage} style={{ width: '100%', height: 152, alignItems: 'center', justifyContent: 'center' }} resizeMode="contain">
+            <View style={{ marginRight: 12, alignItems: 'center' }}>
+              <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Your Next</Text>
+              <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Water:</Text>
+              <Text style={{ color: 'white', fontSize: 16 }}>TBD</Text>
+            </View>
+          </ImageBackground>
         </View>
-        <View style={{ flexDirection: 'column', alignItems: 'center', padding: 8 }}>
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Your Next</Text>
-          <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Fire:</Text>
-          <Text style={{ color: 'white', fontSize: 16 }}>TBD</Text>
+        <View style={{ flexDirection: 'column', alignItems: 'center', flex: 1 }}>
+          <ImageBackground source={fireImage} style={{ width: '100%', height: 152, justifyContent: 'center' }} resizeMode="contain">
+            <View style={{ marginRight: 32, alignItems: 'center' }}>
+              <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Your Next</Text>
+              <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Fire:</Text>
+              <Text style={{ color: 'white', fontSize: 16 }}>TBD</Text>
+            </View>
+          </ImageBackground>
         </View>
       </View>
     </BGView>

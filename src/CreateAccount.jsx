@@ -1,5 +1,5 @@
 import React, { useContext, useState } from 'react';
-import { Text, TextInput, ScrollView, View, Pressable } from 'react-native';
+import { Text, ScrollView, View, Pressable } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import { Auth } from 'aws-amplify';
 import { signUp, updateUserAttributes } from './api/auth';
@@ -30,7 +30,8 @@ export default function CreateAccount({ navigation, ...props }) {
             'custom:googlePayId': input.googlePayId,
             'custom:applePayId': input.applePayId,
             'custom:cashAppId': input.cashAppId,
-            'custom:payPalId': input.payPalId
+            'custom:payPalId': input.payPalId,
+            'custom:zelleId': input.zelleId
           }
         });
         user.setUser(await Auth.currentAuthenticatedUser({ bypassCache: true }));
@@ -132,6 +133,13 @@ export default function CreateAccount({ navigation, ...props }) {
             name="googlePayId"
             placeholder="Android Pay"
             defaultValue={user?.attributes ? user?.attributes['custom:googlePayId'] : ''}
+          />
+          <Input
+            control={control}
+            errors={errors.zelle}
+            name="zelleId"
+            placeholder="Zelle"
+            defaultValue={user?.attributes ? user?.attributes['custom:zelleId'] : ''}
           />
         </View>
 
