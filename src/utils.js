@@ -1,5 +1,7 @@
+import { Platform } from 'react-native';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
+import * as ImagePicker from 'expo-image-picker';
 
 export const registerForPushNotificationsAsync = async () => {
   let token;
@@ -30,4 +32,21 @@ export const registerForPushNotificationsAsync = async () => {
   }
 
   return token;
+};
+
+export const pickImageFromGallery = async () => {
+  if (Platform.OS !== 'web') {
+    const { status } = await ImagePicker.requestMediaLibraryPermissionsAsync();
+    if (status !== 'granted') {
+      return alert('Sorry, we need camera roll permissions to make this work!');
+    }
+  }
+
+  const result = await ImagePicker.launchImageLibraryAsync({
+    mediaTypes: ImagePicker.MediaTypeOptions.Images,
+    quality: 1,
+    base64: true,
+  });
+
+  return result;
 };

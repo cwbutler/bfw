@@ -5,13 +5,14 @@ import BGView from './BackgroundScreen';
 import Avatar from './Avatar';
 import fireImage from '../assets/fire.png';
 import waterImage from '../assets/water.png';
+import Message from './MessageBtn';
 
 export default function HomeScreen() {
   const user = useContext(AWSUserContext);
   const hasName = Boolean(user?.attributes?.name?.trim());
 
   return (
-    <BGView statusBarStyle="dark-content">
+    <BGView>
       <View style={{ alignItems: 'center', justifyContent: 'center', padding: 20 }}>
         <Avatar style={{ marginTop: 20 }} />
 
@@ -42,6 +43,12 @@ export default function HomeScreen() {
             </View>
           </ImageBackground>
         </View>
+      </View>
+
+      <View style={{ flex: 1 }} />
+
+      <View style={{ flexDirection: 'row-reverse', padding: 16 }}>
+        <Message />
       </View>
     </BGView>
   );
