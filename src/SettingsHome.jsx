@@ -5,6 +5,8 @@ import { primary_color } from './styles';
 import config from '../app.json';
 import { registerForPushNotificationsAsync } from './utils';
 import * as Notifications from 'expo-notifications';
+//import * as Linking from 'expo-linking';
+import * as WebBrowser from 'expo-web-browser';
 
 export default function SettingsHome({ navigation }) {
   const [notifStatus, setNotifStatus] = useState();
@@ -40,7 +42,7 @@ export default function SettingsHome({ navigation }) {
             Answers to commonly asked questions
           </ListLabelSubtitle>
         </ListItem>
-        <ListItem>
+        <ListItem onPress={() => WebBrowser.openBrowserAsync('https://www.thebfwapp.com/')}>
           <ListLabel>Invite Friends</ListLabel>
           <ListLabelSubtitle>
             Get Shareable Link

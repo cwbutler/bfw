@@ -26,7 +26,7 @@ export default function HomeScreen() {
       <View style={{ backgroundColor: '#1c1c1c', flexDirection: 'row', justifyContent: 'center', margin: 20 }}>
         <View style={{ flexDirection: 'column', alignItems: 'center', flex: 1 }}>
           <ImageBackground source={waterImage} style={{ width: '100%', height: 152, alignItems: 'center', justifyContent: 'center' }} resizeMode="contain">
-            <View style={{ marginRight: 12, alignItems: 'center' }}>
+            <View style={{ marginRight: 18, alignItems: 'center' }}>
               <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Your Next</Text>
               <Text style={{ color: 'white', fontSize: 16, fontWeight: 'bold' }}>Water:</Text>
               <Text style={{ color: 'white', fontSize: 16 }}>TBD</Text>
