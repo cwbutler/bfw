@@ -31,7 +31,8 @@ export default function CreateAccount({ navigation, ...props }) {
             'custom:applePayId': input.applePayId,
             'custom:cashAppId': input.cashAppId,
             'custom:payPalId': input.payPalId,
-            'custom:zelleId': input.zelleId
+            'custom:zelleId': input.zelleId,
+            'custom:payPalMoneyPool': input.payPalMoneyPool
           }
         });
         user.setUser(await Auth.currentAuthenticatedUser({ bypassCache: true }));
@@ -133,6 +134,13 @@ export default function CreateAccount({ navigation, ...props }) {
             name="googlePayId"
             placeholder="Android Pay"
             defaultValue={user?.attributes ? user?.attributes['custom:googlePayId'] : ''}
+          />
+          <Input
+            control={control}
+            errors={errors.paypalMoneyPool}
+            name="payPalMoneyPool"
+            placeholder="PayPal Money Pool"
+            defaultValue={user?.attributes ? user?.attributes['custom:payPalMoneyPool'] : ''}
           />
           <Input
             control={control}
