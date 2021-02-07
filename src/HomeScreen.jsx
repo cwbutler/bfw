@@ -20,7 +20,7 @@ export default function HomeScreen() {
           {(hasName) ? user.attributes.name : user?.attributes?.email}
         </Text>
         <Text style={{ color: 'white', fontSize: 16, marginTop: 8 }}>
-          #{user?.attributes['custom:memberNumber'] || 'TBD'}
+          #{user?.attributes['custom:preferred_username'] || 'TBD'}
         </Text>
       </View>
 
