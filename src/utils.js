@@ -2,6 +2,7 @@ import { Platform } from 'react-native';
 import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import * as ImagePicker from 'expo-image-picker';
+import * as MailComposer from 'expo-mail-composer';
 
 export const registerForPushNotificationsAsync = async () => {
   let token;
@@ -50,3 +51,19 @@ export const pickImageFromGallery = async () => {
 
   return result;
 };
+
+export async function mailTo({ recipients, subject, body, isHtml }) {
+  if (await MailComposer.isAvailableAsync()) {
+    const { status } = await MailComposer.composeAsync({
+      recipients,
+      subject,
+      body,
+      isHtml
+    });
+
+    return status;
+  } else {
+    Linking.openURL(`mailto://${recipients[0]}?subject=${data.subject}&body=${data.message}`);
+    return "sent"; 
+  }
+}

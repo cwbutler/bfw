@@ -1,13 +1,13 @@
 import React,{ useContext, useRef } from 'react';
-import { Pressable, Text, TextInput, View, ScrollView, Platform, KeyboardAvoidingView } from 'react-native';
+import { Pressable, Text, TextInput, View, ScrollView, Platform, KeyboardAvoidingView, Linking } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
-import { RichEditor, RichToolbar, actions } from 'react-native-pell-rich-editor'
+import { RichEditor, RichToolbar, actions } from 'react-native-pell-rich-editor';
 import BGScreen from './BackgroundScreen';
 import { primary_color } from './styles';
 import { AWSUserContext } from './useAWSUser';
-import { pickImageFromGallery } from './utils';
+import { mailTo, pickImageFromGallery } from './utils';
 
-export default function NewAdminMessage() {
+export default function NewAdminMessage({ navigation }) {
   const user = useContext(AWSUserContext);
   const { control, handleSubmit, errors } = useForm();
   const editor = useRef();
@@ -16,7 +16,20 @@ export default function NewAdminMessage() {
     const image = await pickImageFromGallery();
     if (!image.cancelled) {
       const ext = /(?:\.([^.]+))?$/;  
-      editor.current?.insertImage(`data:image/${ext.exec(image.uri)[1]};base64,${image.base64}`);
+      editor.current?.insertImage(`data:image/${ext.exec(image.uri)[1]};base64,${image.base64}`, 'width: 100%;');
+    }
+  }
+
+  async function onSubmit(data) {
+    const result = await mailTo({
+      recipients: ['blackfamilywealthgroup@gmail.com'],
+      subject: data.subject,
+      body: data.message,
+      isHtml: true
+    });
+
+    if (result === 'sent') {
+      navigation.goBack();
     }
   }
 
@@ -81,7 +94,6 @@ export default function NewAdminMessage() {
               actions.insertOrderedList,
               actions.checkboxList,
               actions.insertLink,
-              actions.insertVideo,
               actions.undo,
               actions.redo
             ]}
@@ -89,7 +101,10 @@ export default function NewAdminMessage() {
         </View>
 
         <View style={{ padding: 10 }}>
-          <Pressable style={{ backgroundColor: primary_color, padding: 14, borderRadius: 4 }}>
+          <Pressable 
+            style={{ backgroundColor: primary_color, padding: 14, borderRadius: 4 }}
+            onPress={handleSubmit(onSubmit)}
+          >
             <Text style={{ color: 'white', fontSize: 16, textAlign: 'center' }}>
               Send message
             </Text>
