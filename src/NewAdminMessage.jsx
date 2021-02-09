@@ -1,4 +1,4 @@
-import React,{ useContext, useRef } from 'react';
+import React,{ useContext, useRef, useState } from 'react';
 import { Pressable, Text, TextInput, View, ScrollView, Platform, KeyboardAvoidingView, Linking } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
 import { RichEditor, RichToolbar, actions } from 'react-native-pell-rich-editor';
@@ -11,12 +11,14 @@ export default function NewAdminMessage({ navigation }) {
   const user = useContext(AWSUserContext);
   const { control, handleSubmit, errors } = useForm();
   const editor = useRef();
+  const [attachments, setAttachements] = useState([]);
 
   async function onPressAddImage() {
     const image = await pickImageFromGallery();
     if (!image.cancelled) {
-      const ext = /(?:\.([^.]+))?$/;  
-      editor.current?.insertImage(`data:image/${ext.exec(image.uri)[1]};base64,${image.base64}`, 'width: 100%;');
+      //const ext = /(?:\.([^.]+))?$/;  
+      //editor.current?.insertImage(`data:image/${ext.exec(image.uri)[1]};base64,${image.base64}`, 'width: 100%;');
+      setAttachements([...attachments, image.uri]);
     }
   }
 
@@ -25,7 +27,8 @@ export default function NewAdminMessage({ navigation }) {
       recipients: ['blackfamilywealthgroup@gmail.com'],
       subject: data.subject,
       body: data.message,
-      isHtml: true
+      isHtml: true,
+      attachments
     });
 
     if (result === 'sent') {
