@@ -6,6 +6,7 @@ import DrawerContent from './DrawerContent';
 import DrawerToggle from './DrawerToggleBtn'; 
 import Settings from './Settings';
 import NewMessage from './NewAdminMessage';
+import ListMembers from './ListUsers';
 import { primary_color } from './styles';
 
 const Drawer = createDrawerNavigator();
@@ -68,6 +69,11 @@ export default function DrawerNavigator() {
         name="Settings" 
         component={Settings}
         options={{ headerShown: false }}
+      />  
+      <Drawer.Screen
+        name="ListMembers" 
+        component={ListMembers}
+        options={{ title: "Members" }}
       />  
     </Drawer.Navigator>
   );

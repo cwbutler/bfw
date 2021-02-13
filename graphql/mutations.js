@@ -5,19 +5,22 @@ export const createAppUser = /* GraphQL */ `
   mutation CreateAppUser($input: UserInput) {
     createAppUser(input: $input) {
       id
+      preferred_username
       email
-      firstName
-      lastName
-      memberNumber
-      active
+      email_verified
+      family_name
+      given_name
+      name
+      enabled
+      subscribed
       subscriptionId
       payPalId
       cashAppId
       applePayId
       googlePayId
-      avatar
-      createdAt
-      updatedAt
+      payPalMoneyPool
+      picture
+      status
     }
   }
 `;
@@ -30,88 +33,22 @@ export const batchUpdateUsers = /* GraphQL */ `
   mutation BatchUpdateUsers($input: [UpdateUserInput]) {
     batchUpdateUsers(input: $input) {
       id
+      preferred_username
       email
-      firstName
-      lastName
-      memberNumber
-      active
+      email_verified
+      family_name
+      given_name
+      name
+      enabled
+      subscribed
       subscriptionId
       payPalId
       cashAppId
       applePayId
       googlePayId
-      avatar
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const createUser = /* GraphQL */ `
-  mutation CreateUser(
-    $input: CreateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    createUser(input: $input, condition: $condition) {
-      id
-      email
-      firstName
-      lastName
-      memberNumber
-      active
-      subscriptionId
-      payPalId
-      cashAppId
-      applePayId
-      googlePayId
-      avatar
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const updateUser = /* GraphQL */ `
-  mutation UpdateUser(
-    $input: UpdateUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    updateUser(input: $input, condition: $condition) {
-      id
-      email
-      firstName
-      lastName
-      memberNumber
-      active
-      subscriptionId
-      payPalId
-      cashAppId
-      applePayId
-      googlePayId
-      avatar
-      createdAt
-      updatedAt
-    }
-  }
-`;
-export const deleteUser = /* GraphQL */ `
-  mutation DeleteUser(
-    $input: DeleteUserInput!
-    $condition: ModelUserConditionInput
-  ) {
-    deleteUser(input: $input, condition: $condition) {
-      id
-      email
-      firstName
-      lastName
-      memberNumber
-      active
-      subscriptionId
-      payPalId
-      cashAppId
-      applePayId
-      googlePayId
-      avatar
-      createdAt
-      updatedAt
+      payPalMoneyPool
+      picture
+      status
     }
   }
 `;

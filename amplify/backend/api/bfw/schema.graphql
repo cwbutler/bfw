@@ -1,31 +1,11 @@
-type User @model
-  @auth(rules: [
-    { allow: private, provider: iam, operations: [create, read, update, delete] },
-    { allow: public, provider: iam, operations: [create] },
-  ]) 
-{
-  id: ID!
-  email: String
-  firstName: String
-  lastName: String
-  memberNumber: String
-  active: Boolean
-  subscriptionId: String
-  payPalId: String
-  cashAppId: String
-  applePayId: String
-  googlePayId: String
-  avatar: String
-} 
-
 type Query {
   listAppUsers(filter: String, limit: Int, nextToken: String): AppUserConnection @aws_cognito_user_pools @aws_iam @function(name: "bfwListUsersResolver-${env}")
 }
 
 type Mutation {
-  createAppUser(input: UserInput): User @function(name: "bfwCreateUserResolver-${env}")
+  createAppUser(input: UserInput): AppUser @function(name: "bfwCreateUserResolver-${env}")
   subscribeUser(input: SubscribeUserInput): Boolean @function(name: "bfwSubscribeUser-${env}")
-  batchUpdateUsers(input: [UpdateUserInput]): [User] @aws_iam @aws_cognito_user_pools
+  batchUpdateUsers(input: [UpdateUserInput]): [AppUser] @aws_iam @aws_cognito_user_pools
 }
 
 input SubscribeUserInput {
@@ -69,24 +49,22 @@ type AppUserConnection @aws_cognito_user_pools @aws_iam {
   nextToken: String
 } 
 
-type AppUser {
-  id: ID!
-  sub: String
+type AppUser @aws_cognito_user_pools @aws_iam {
+  id: ID
+  preferred_username: String
   email: String
   email_verified: String
-  profile: String
-  name: String
-  subscribed: String
-  given_name: String
   family_name: String
-  memberNumber: String
+  given_name: String
+  name: String
   enabled: Boolean
+  subscribed: Boolean
   subscriptionId: String
   payPalId: String
   cashAppId: String
   applePayId: String
   googlePayId: String
+  payPalMoneyPool: String
+  picture: String  
   status: String
-  createdAt: String
-  modifiedAt: String
 }
