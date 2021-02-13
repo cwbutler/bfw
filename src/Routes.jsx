@@ -1,18 +1,26 @@
-import React, { useContext, useEffect, useRef } from 'react';
-import * as Notifications from 'expo-notifications';
-import { registerForPushNotificationsAsync } from './utils';
+import React, { useContext } from 'react';
+import { createStackNavigator } from '@react-navigation/stack';
 import { AWSUserContext } from './useAWSUser';
 import Providers from './Providers';
 import AuthStack from './AuthNavigationStack';
 import AppStack from './AppNavigationStack';
-import { updateUserAttributes } from './api/auth';
 import useUpdates from './useUpdates';
 import useNotifications from './useNotification';
+
+const Stack = createStackNavigator();
 
 export default function Routes() {
   return (
     <Providers>
-      <AppNavigation />
+      <Stack.Navigator
+        initialRouteName="App"
+      >
+        <Stack.Screen
+          name="App"
+          component={AppNavigation}
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
     </Providers>
   );
 }

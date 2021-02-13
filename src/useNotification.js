@@ -1,8 +1,10 @@
 import { useContext, useEffect, useRef } from 'react';
+import { Alert } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import { AWSUserContext } from './useAWSUser';
 import { registerForPushNotificationsAsync } from './utils';
 import { updateUserAttributes } from './api/auth';
+import { useNavigation } from '@react-navigation/native';
 
 export default function useNotificationToken() {
   const user = useContext(AWSUserContext);
@@ -20,12 +22,12 @@ export default function useNotificationToken() {
   
       // This listener is fired whenever a notification is received while the app is foregrounded
       notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
-        console.log(notification.request.content);
+        Alert.alert(notification.request.content.title, notification.request.content.body);
       });
   
       // This listener is fired whenever a user taps on or interacts with a notification (works when app is foregrounded, backgrounded, or killed)
-      responseListener.current = Notifications.addNotificationResponseReceivedListener(response => {
-        console.log(response);
+      responseListener.current = Notifications.addNotificationResponseReceivedListener(({ notification }) => {
+        Alert.alert(notification.request.content.title, notification.request.content.body);
       });
   
       return () => {

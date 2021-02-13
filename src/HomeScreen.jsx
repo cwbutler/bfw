@@ -7,7 +7,7 @@ import fireImage from '../assets/fire.png';
 import waterImage from '../assets/water.png';
 import Message from './MessageBtn';
 
-export default function HomeScreen() {
+export default function HomeScreen(props) {
   const user = useContext(AWSUserContext);
   const hasName = Boolean(user?.attributes?.name?.trim());
   const [refreshing, setRefreshing] = useState(false);
@@ -16,7 +16,7 @@ export default function HomeScreen() {
     setRefreshing(true);
     await user.refresh();
     setRefreshing(false);
-  }, []); 
+  }, []);
 
   return (
     <BGView>
