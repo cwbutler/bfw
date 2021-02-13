@@ -2,11 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Image, FlatList, Text, View, Pressable, StyleSheet, ActivityIndicator  } from 'react-native';
 import { API, graphqlOperation, Storage } from 'aws-amplify';
 import { Ionicons } from '@expo/vector-icons';
+import RNPickerSelect from 'react-native-picker-select';
+import { useNavigation } from '@react-navigation/native';
 import { listAppUsers } from '../graphql/queries';
 import BGScreen from './BackgroundScreen';
 import defaultProfilePic from '../assets/defaultProfile.png';
 import { TextInput } from 'react-native-gesture-handler';
-import RNPickerSelect from 'react-native-picker-select';
 import { primary_color } from './styles';
 
 const filterTypes = {
@@ -46,6 +47,17 @@ export default function ListUsers() {
     setLoading(false);
   }
 
+  const loadMore = async () => {
+    if (nextToken) {
+      const { data: { listAppUsers: result } } = await API.graphql(graphqlOperation(listAppUsers, { filter, nextToken }));
+      setNextToken(result?.nextToken);
+      setUsers(
+        [...users, ...result.items.filter((a) => Number(a.preferred_username))]
+        .sort((a, b) => Number(a.preferred_username) > Number(b.preferred_username))
+      );
+    }
+  }
+
   return (
     <BGScreen backgroundStyle={{ backgroundColor: '#fcfcfc' }}>
       <View style={{ flexDirection: 'row', margin: 8, justifyContent: 'center' }}>
@@ -78,6 +90,7 @@ export default function ListUsers() {
           data={users}
           renderItem={renderItem}
           keyExtractor={item => item.id}
+          onEndReached={loadMore}
         />
       )}
     </BGScreen> 
@@ -86,6 +99,7 @@ export default function ListUsers() {
 
 export function UserItem(props) {
   const [picture, setPicture] =  useState(defaultProfilePic);
+  const navigation = useNavigation();
   
   useEffect(() => {
     if (props.picture) {
@@ -99,6 +113,7 @@ export function UserItem(props) {
   return (
     <Pressable 
       style={{ flexDirection: 'row', alignItems: 'center', padding: 18  , borderBottomColor: 'gray', borderBottomWidth: 1 }}
+      onPress={() => navigation.navigate('Profile', { user: props })}
     >
       <View style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Image

@@ -7,6 +7,7 @@ import DrawerToggle from './DrawerToggleBtn';
 import Settings from './Settings';
 import NewMessage from './NewAdminMessage';
 import ListMembers from './ListUsers';
+import Profile from './Profile';
 import { primary_color } from './styles';
 
 const Drawer = createDrawerNavigator();
@@ -46,6 +47,29 @@ const Home = () => {
   );
 };
 
+const Member = () => {
+  return (
+    <HomeStack.Navigator
+      initialRouteName="ListMembers"
+      screenOptions={defaultScreenOptions}
+    >
+      <HomeStack.Screen
+        name="ListMembers" 
+        component={ListMembers}
+        options={{ 
+          title: "Members",
+          headerLeft: () => <DrawerToggle />
+        }}
+      />
+      <HomeStack.Screen
+        name="Profile"
+        component={Profile}
+        options={{ title: 'Member Profile' }}
+      />
+    </HomeStack.Navigator>
+  );
+};
+
 export default function DrawerNavigator() {
   return (
     <Drawer.Navigator
@@ -66,14 +90,17 @@ export default function DrawerNavigator() {
         }}
       />
       <Drawer.Screen
+        name="ListMembers" 
+        component={Member}
+        options={{ 
+          headerShown: false,
+          title: 'Members'
+        }}
+      />  
+      <Drawer.Screen
         name="Settings" 
         component={Settings}
         options={{ headerShown: false }}
-      />  
-      <Drawer.Screen
-        name="ListMembers" 
-        component={ListMembers}
-        options={{ title: "Members" }}
       />  
     </Drawer.Navigator>
   );
