@@ -1,7 +1,6 @@
 import React, { useContext, useState } from 'react';
 import { Text, ScrollView, View, Pressable } from 'react-native';
 import { useForm, Controller } from "react-hook-form";
-import { Auth } from 'aws-amplify';
 import { signUp, updateUserAttributes } from './api/auth';
 import BGScreen from './BackgroundScreen';
 import Loader from './FullViewLoader';
@@ -35,7 +34,7 @@ export default function CreateAccount({ navigation, ...props }) {
             'custom:payPalMoneyPool': input.payPalMoneyPool
           }
         });
-        user.setUser(await Auth.currentAuthenticatedUser({ bypassCache: true }));
+        user.refresh();
       } else {
         await signUp(input);
         navigation.navigate('VerifyAccount', { email: input.email });
@@ -144,7 +143,7 @@ export default function CreateAccount({ navigation, ...props }) {
           />
           <Input
             control={control}
-            errors={errors.zelle}
+            errors={errors.zelleId}
             name="zelleId"
             placeholder="Zelle"
             defaultValue={user?.attributes ? user?.attributes['custom:zelleId'] : ''}

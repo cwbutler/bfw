@@ -16,7 +16,9 @@ export async function signUp(input) {
       'custom:applePayId': input.applePayId?.trim(),
       'custom:cashAppId': input.cashAppId?.trim(),
       'custom:googlePayId': input.googlePayId?.trim(),
-      'custom:payPalId': input.payPalId?.trim()
+      'custom:payPalId': input.payPalId?.trim(),
+      'custom:zelleId': input.zelleId?.trim(),
+      'custom:payPalMoneyPool': input.payPalMoneyPool?.trim(),
     }
   });
   return user;
