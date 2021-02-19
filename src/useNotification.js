@@ -3,8 +3,6 @@ import { Alert } from 'react-native';
 import * as Notifications from 'expo-notifications';
 import { AWSUserContext } from './useAWSUser';
 import { registerForPushNotificationsAsync } from './utils';
-import { updateUserAttributes } from './api/auth';
-import { useNavigation } from '@react-navigation/native';
 
 export default function useNotificationToken() {
   const user = useContext(AWSUserContext);
@@ -13,13 +11,7 @@ export default function useNotificationToken() {
 
   useEffect(() => {
     if (user?.Session) {
-      registerForPushNotificationsAsync()
-        .then(async token =>  {
-          if (token) {
-            await updateUserAttributes({ user, attributes: { 'custom:notificationToken': token } });
-          }
-        });
-  
+      registerForPushNotificationsAsync();
       // This listener is fired whenever a notification is received while the app is foregrounded
       notificationListener.current = Notifications.addNotificationReceivedListener(notification => {
         Alert.alert(notification.request.content.title, notification.request.content.body);
@@ -31,7 +23,6 @@ export default function useNotificationToken() {
       });
   
       return () => {
-        Notifications.removeNotificationSubscription(notificationListener);
         Notifications.removeNotificationSubscription(responseListener);
       };
     }

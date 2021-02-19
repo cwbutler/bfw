@@ -1,14 +1,15 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Image, Text, View, Pressable, ScrollView } from 'react-native';  
 import { Storage } from 'aws-amplify';
 import Clipboard from 'expo-clipboard';
 import * as Haptics from 'expo-haptics';
 import BGScreen from './BackgroundScreen';
 import defaultProfilePic from '../assets/defaultProfile.png';
+import { AWSUserContext } from './useAWSUser';
 import { primary_color } from './styles';
 
 export default function Profile({ route }) {
-  const user = route.params.user;
+  const user = route.params?.user || useContext(AWSUserContext);
   const [picture, setPicture] =  useState(defaultProfilePic);
 
   useEffect(() => {
