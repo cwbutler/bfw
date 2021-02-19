@@ -24,6 +24,8 @@ input UserInput {
   cashAppId: String
   applePayId: String
   googlePayId: String
+  payPalMoneyPool: String
+  zelleId: String
   avatar: String
 }
 
@@ -39,6 +41,8 @@ input UpdateUserInput {
   cashAppId: String
   applePayId: String
   googlePayId: String
+  payPalMoneyPool: String
+  zelleId: String
   avatar: String
   createdAt: String
   updatedAt: String
@@ -65,6 +69,7 @@ type AppUser @aws_cognito_user_pools @aws_iam {
   applePayId: String
   googlePayId: String
   payPalMoneyPool: String
+  zelleId: String
   picture: String  
   status: String
 }

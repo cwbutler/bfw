@@ -19,6 +19,7 @@ export const createAppUser = /* GraphQL */ `
       applePayId
       googlePayId
       payPalMoneyPool
+      zelleId
       picture
       status
     }
@@ -47,6 +48,7 @@ export const batchUpdateUsers = /* GraphQL */ `
       applePayId
       googlePayId
       payPalMoneyPool
+      zelleId
       picture
       status
     }

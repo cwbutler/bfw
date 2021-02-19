@@ -20,6 +20,7 @@ export const listAppUsers = /* GraphQL */ `
         applePayId
         googlePayId
         payPalMoneyPool
+        zelleId
         picture
         status
       }
