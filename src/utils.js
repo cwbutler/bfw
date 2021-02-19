@@ -3,6 +3,8 @@ import Constants from 'expo-constants';
 import * as Notifications from 'expo-notifications';
 import * as ImagePicker from 'expo-image-picker';
 import * as MailComposer from 'expo-mail-composer';
+import { Auth } from 'aws-amplify';
+import { updateUserAttributes } from './api/auth';
 
 export const registerForPushNotificationsAsync = async () => {
   let token;
@@ -19,6 +21,12 @@ export const registerForPushNotificationsAsync = async () => {
       return;
     }
     token = (await Notifications.getExpoPushTokenAsync()).data;
+    await updateUserAttributes({ 
+      user: (await Auth.currentAuthenticatedUser()), 
+      attributes: {
+        'custom:notificationToken': token
+      } 
+    });
   } else {
     //alert('Must use physical device for Push Notifications');
   }
