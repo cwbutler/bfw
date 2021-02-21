@@ -8,10 +8,12 @@ import Settings from './Settings';
 import NewMessage from './NewAdminMessage';
 import ListMembers from './ListUsers';
 import Profile from './Profile';
+import NotifyScreen from './Notifications';
 import { primary_color } from './styles';
 
 const Drawer = createDrawerNavigator();
 const HomeStack = createStackNavigator();
+const NotificationStack = createStackNavigator();
 
 const defaultScreenOptions = {
   headerShown: true,
@@ -44,6 +46,24 @@ const Home = () => {
         }}
       />
     </HomeStack.Navigator>
+  );
+};
+
+const Notifications = () => {
+  return (
+    <NotificationStack.Navigator
+      initialRouteName="HomeNotify"
+      screenOptions={defaultScreenOptions}
+    >
+      <NotificationStack.Screen
+        name="HomeNotify"
+        component={NotifyScreen}
+        options={{
+          headerLeft: () => <DrawerToggle />,
+          title: "Notifications"
+        }}
+      />
+    </NotificationStack.Navigator>
   );
 };
 
@@ -89,6 +109,13 @@ export default function DrawerNavigator() {
           headerShown: false
         }}
       />
+      <Drawer.Screen
+        name="Notifications" 
+        component={Notifications}
+        options={{ 
+          headerShown: false
+        }}
+      />  
       <Drawer.Screen
         name="ListMembers" 
         component={Member}
