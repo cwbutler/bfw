@@ -23,6 +23,10 @@
         "bfwLambdaUtils": {
           "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
           "s3Key": "amplify-builds/bfwLambdaUtils-build.zip"
+        },
+        "bfwFireWaterNotify": {
+          "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
+          "s3Key": "amplify-builds/bfwFireWaterNotify-7a77506d456937587344-build.zip"
         }
       }
     },
@@ -96,6 +100,22 @@
                 }
               ],
               "hash": "Gq8HSmq6393W5XIKjaIy3R7v6rUvzSAWe6yMq6zKP6Q="
+            },
+            "9": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "rnyv6725Td91gd/8JOW88JJdLsIIwA4A1QQGFkZVyEI="
+            },
+            "10": {
+              "permissions": [
+                {
+                  "type": "private"
+                }
+              ],
+              "hash": "+O7+Yd8Wd8Wq7bQsC2Cj0Jk+m25U0t8RiGoJRHpOK/8="
             }
           }
         },

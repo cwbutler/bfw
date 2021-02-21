@@ -6,7 +6,7 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "eject": "expo eject",
-    "updateAppsyncOperations": "amplify codegen && babel ./graphql --config-file ./babel.config.json -d ./amplify/backend/function/appsyncOperations/opt/graphql/"
+    "updateAppsyncOperations": "amplify codegen && babel ./graphql --config-file ./babel.config.js -d ./amplify/backend/function/appsyncOperations/opt/graphql/"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.10",

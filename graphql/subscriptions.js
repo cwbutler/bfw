@@ -1,62 +1,44 @@
 /* eslint-disable */
 // this is an auto generated file. This will be overwritten
 
-export const onCreateUser = /* GraphQL */ `
-  subscription OnCreateUser {
-    onCreateUser {
+export const onCreateNotifications = /* GraphQL */ `
+  subscription OnCreateNotifications {
+    onCreateNotifications {
       id
-      email
-      firstName
-      lastName
-      memberNumber
-      active
-      subscriptionId
-      payPalId
-      cashAppId
-      applePayId
-      googlePayId
-      avatar
+      to
+      subject
+      body
       createdAt
+      owner
+      email
       updatedAt
     }
   }
 `;
-export const onUpdateUser = /* GraphQL */ `
-  subscription OnUpdateUser {
-    onUpdateUser {
+export const onUpdateNotifications = /* GraphQL */ `
+  subscription OnUpdateNotifications {
+    onUpdateNotifications {
       id
-      email
-      firstName
-      lastName
-      memberNumber
-      active
-      subscriptionId
-      payPalId
-      cashAppId
-      applePayId
-      googlePayId
-      avatar
+      to
+      subject
+      body
       createdAt
+      owner
+      email
       updatedAt
     }
   }
 `;
-export const onDeleteUser = /* GraphQL */ `
-  subscription OnDeleteUser {
-    onDeleteUser {
+export const onDeleteNotifications = /* GraphQL */ `
+  subscription OnDeleteNotifications {
+    onDeleteNotifications {
       id
-      email
-      firstName
-      lastName
-      memberNumber
-      active
-      subscriptionId
-      payPalId
-      cashAppId
-      applePayId
-      googlePayId
-      avatar
+      to
+      subject
+      body
       createdAt
+      owner
+      email
       updatedAt
     }
   }

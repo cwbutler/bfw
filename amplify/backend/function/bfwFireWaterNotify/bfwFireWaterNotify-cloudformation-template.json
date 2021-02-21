@@ -33,6 +33,12 @@
     "functionbfwLambdaUtilsArn": {
       "Type": "String",
       "Default": "functionbfwLambdaUtilsArn"
+    },
+    "deploymentBucketName": {
+      "Type": "String"
+    },
+    "s3Key": {
+      "Type": "String"
     }
   },
   "Conditions": {
@@ -106,13 +112,17 @@
             "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:bfwLambdaUtils-bfw:1"
           },
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:appsyncOperations-bfw:8"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:appsyncOperations-bfw:10"
           }
         ],
         "Timeout": "25",
         "Code": {
-          "S3Bucket": "amplify-bfw-bfw-83405-deployment",
-          "S3Key": "amplify-builds/bfwFireWaterNotify-4f6a592b35615a4e4c47-build.zip"
+          "S3Bucket": {
+            "Ref": "deploymentBucketName"
+          },
+          "S3Key": {
+            "Ref": "s3Key"
+          }
         }
       }
     },

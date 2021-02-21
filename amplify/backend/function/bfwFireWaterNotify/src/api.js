@@ -24,3 +24,17 @@ function fetchUsers(params) {
     });
   });
 }
+
+async function getCognitoUser(email='') {
+    const params = {
+      UserPoolId: process.env.AUTH_BFWFC5BCFCD_USERPOOLID,
+      Username: email.toLowerCase()
+    };
+    return new Promise((resolve, reject) => {
+      cognitoidentityserviceprovider.adminGetUser(params, function(err, data) {
+      if (err) reject(err); // an error occurred
+      else resolve(data);
+    });
+  });
+}
+exports.getCognitoUser = getCognitoUser;
