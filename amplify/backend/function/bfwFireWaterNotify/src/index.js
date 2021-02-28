@@ -13,7 +13,7 @@ const { request } = require('/opt/appSyncRequest')
 const { batchUpdateNotifications } = require('/opt/graphql/mutations')
 
 exports.handler = async (event) => {
-	return sendNotifications(event);
+	return await sendNotifications(event);
 };
 
 function uniqUsers(users) {
@@ -86,7 +86,6 @@ async function addMemberNumbers(input) {
 	const usersNotFound = [];
 	const users = [];
 	await asyncForEach(uniqUsers(input.users), async (email, index) => {
-		if (index + 1 === 57) { console.log(email) }
 		try {
 			await api.updateUserAttributes(email, [{ Name: 'preferred_username', Value: String(index + 1).padStart(4, '0') }]);
 			users.push(email);
@@ -153,14 +152,14 @@ async function sendNotifications(input) {
 				
 				to = (notificationToken) ? notificationToken.Value : 'N/A';
 	
-				if (groupIndex === 0) {
+				if (groupIndex === 0 && userIndex < 4) {
 					title = 'Time To Receive!';
 					body = `Hi ${name.Value} Community #${num.Value}
 IT'S TIME TO BE WATERED 💦
 You will receive Gifts from 8 people.`;
 					notifications.push(createMessage({ to, title, body }));
-					to !== 'N/A' && dbData.push({ to, subject: title, body, owner: owner.Value, email });
-				} else if (groupIndex > 0 && groupIndex < 9) {
+					dbData.push({ to, subject: title, body, owner: owner.Value, email });
+				} else if (groupIndex > 0 && groupIndex < 5) {
 					gifter = await api.getCognitoUser(users[0][groupIndex - 1]);
 					gifterName = find(gifter.UserAttributes, { Name: 'name' });
 					gifterNum = find(gifter.UserAttributes, { Name: 'preferred_username' });
@@ -171,9 +170,9 @@ Please IMMEDIATELY send your Gift to ${gifterName.Value} Member #${gifterNum.Val
 You MUST send your Gift Up confirmation screenshot to admin via app messenger!`;
 
 					notifications.push(createMessage({ to, title, body }));
-					to !== 'N/A' && dbData.push({ to, subject: title, body, owner: owner.Value, email });
-				} else if (groupIndex > 8 && groupIndex < 40) {
-					gifter = await api.getCognitoUser(uniqueUsers[groupIndex - 1]);
+					dbData.push({ to, subject: title, body, owner: owner.Value, email });
+				} else if (groupIndex > 8 && groupIndex < 41) {
+					gifter = await api.getCognitoUser(uniqueUsers[groupIndex - 1].toLowerCase());
 					gifterName = find(gifter.UserAttributes, { Name: 'name' });
 					gifterNum = find(gifter.UserAttributes, { Name: 'preferred_username' });
 					title = 'Its Time To Fire!';
@@ -183,7 +182,7 @@ Please IMMEDIATELY send your Gift to ${gifterName.Value} Member #${gifterNum.Val
 You MUST send your Gift In confirmation screenshot to admin via app messenger!`;
 
 					notifications.push(createMessage({ to, title, body }));
-					to !== 'N/A' && dbData.push({ to, subject: title, body, owner: owner.Value, email });
+					dbData.push({ to, subject: title, body, owner: owner.Value, email });
 				}
 			} catch (e) {
 				if (e.errorType === 'UserNotFoundException' || e.code === 'UserNotFoundException') {
@@ -196,19 +195,23 @@ You MUST send your Gift In confirmation screenshot to admin via app messenger!`;
 	});
 	
 	try {
-		// await Promise.all(chunk(notifications, 100).map(async notify => await sendNotification(notify)));
-		await request({
-      query: batchUpdateNotifications,
-      variables: { input: dbData },
-    }, process.env.API_BFW_GRAPHQLAPIENDPOINTOUTPUT);
+		await Promise.all(chunk(notifications, 100).map(async notify => await sendNotification(notify)));
+		await asyncForEach(chunk(dbData, 25), async (input) => {
+			await request({
+		        query: batchUpdateNotifications,
+		        variables: { input },
+	    	}, process.env.API_BFW_GRAPHQLAPIENDPOINTOUTPUT);
+		});
 	} catch (e) {
 		console.log(e);
 	}
 	
 	return {
 		notifications,
-		dbData,
+		//dbData,
 		notfound,
-		noNotificationToken,
+		//noNotificationToken,
 	};
 }
+
+function getNotifications() {}

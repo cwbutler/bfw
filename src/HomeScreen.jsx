@@ -11,6 +11,7 @@ export default function HomeScreen(props) {
   const user = useContext(AWSUserContext);
   const hasName = Boolean(user?.attributes?.name?.trim());
   const [refreshing, setRefreshing] = useState(false);
+  console.log(user.attributes)
 
   const onRefresh = useCallback(async () => {
     setRefreshing(true);
@@ -31,7 +32,7 @@ export default function HomeScreen(props) {
             {(hasName) ? user.attributes.name : user?.attributes?.email}
           </Text>
           <Text style={{ color: 'white', fontSize: 16, marginTop: 8 }}>
-            #{user?.attributes['custom:preferred_username'] || 'TBD'}
+            #{user?.attributes?.preferred_username || 'TBD'}
           </Text>
         </View>
 

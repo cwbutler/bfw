@@ -3,7 +3,7 @@ import { Alert, ActivityIndicator, FlatList, Pressable, Text, View } from 'react
 import { API, graphqlOperation } from 'aws-amplify';
 import BGScreen from './BackgroundScreen';
 import { primary_color } from './styles';
-import { listNotificationss } from '../graphql/queries';
+import { listBfwNotifications } from '../graphql/queries';
 import { AWSUserContext } from './useAWSUser';
 import { timeAgo } from './utils';
 
@@ -14,12 +14,12 @@ export default function Notifications() {
   const renderItem = ({ item }) => <Notification {...item} />;
 
   useEffect(() => {
-    API.graphql(graphqlOperation(listNotificationss, { 
-      filter: { owner: { eq: user.attributes.sub } },
+    API.graphql(graphqlOperation(listBfwNotifications, { 
+      owner: user.attributes.sub,
       limit: 25
     }))
       .then((r) => {
-        setNotifications(r?.data?.listNotificationss?.items.sort((a, b) => a.createdAt < b.createdAt));
+        setNotifications(r?.data?.listBFWNotifications?.items.sort((a, b) => a.createdAt < b.createdAt));
         setLoading(false);
       })
       .catch(e => console.log(e));
@@ -33,7 +33,7 @@ export default function Notifications() {
           <FlatList
             data={notifications}
             renderItem={renderItem}
-            keyExtractor={item => item.id}
+            keyExtractor={item => `${item.owner}${item.createdAt}`}
           />
         ) : (
           <View>

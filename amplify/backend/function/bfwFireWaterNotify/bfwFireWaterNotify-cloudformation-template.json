@@ -112,7 +112,7 @@
             "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:bfwLambdaUtils-bfw:1"
           },
           {
-            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:appsyncOperations-bfw:10"
+            "Fn::Sub": "arn:aws:lambda:${AWS::Region}:${AWS::AccountId}:layer:appsyncOperations-bfw:12"
           }
         ],
         "Timeout": "25",
@@ -307,6 +307,25 @@
                   ]
                 }
               ]
+            },
+            {
+              "Effect": "Allow",
+              "Action": [
+                "dynamodb:PutItem",
+                "dynamodb:DeleteItem",
+                "dynamodb:GetItem",
+                "dynamodb:Query",
+                "dynamodb:Scan",
+                "dynamodb:UpdateItem",
+                "dynamodb:BatchWriteItem",
+                "dynamodb:Scan"
+              ],
+              "Resource": "arn:aws:dynamodb:*:*:table/*"
+            },
+            {
+              "Effect": "Allow",
+              "Action": "dynamodb:Query",
+              "Resource": "arn:aws:dynamodb:*:*:table/*/index/*"
             }
           ]
         }

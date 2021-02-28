@@ -1,17 +1,17 @@
 const AWS = require('aws-sdk');
 const cognitoidentityserviceprovider = new AWS.CognitoIdentityServiceProvider();
 
-async function listCognitoUsers(users=[], PaginationToken=undefined) {
+async function listCognitoUsers({ users=[], PaginationToken=undefined, AttributesToGet=['email', 'sub'] }) {
     const params = {
       UserPoolId: process.env.AUTH_BFWFC5BCFCD_USERPOOLID,
-      AttributesToGet: ['email', 'sub'],
+      AttributesToGet,
       Limit: 60,
       PaginationToken
     };
     
     const result = await fetchUsers(params);
     users = users.concat(result.Users);
-    if (result.PaginationToken) users = await listCognitoUsers(users, result.PaginationToken);
+    if (result.PaginationToken) users = await listCognitoUsers({ users, PaginationToken: result.PaginationToken });
     return users;
 }
 exports.listCognitoUsers = listCognitoUsers;
@@ -38,3 +38,18 @@ async function getCognitoUser(email='') {
   });
 }
 exports.getCognitoUser = getCognitoUser;
+
+async function updateUserAttributes(Username, UserAttributes=[]) {
+    const params = {
+      UserPoolId: process.env.AUTH_BFWFC5BCFCD_USERPOOLID,
+      Username: Username.toLowerCase().trim(),
+      UserAttributes
+    };
+    return new Promise((resolve, reject) => {
+      cognitoidentityserviceprovider.adminUpdateUserAttributes(params, function(err, data) {
+      if (err) reject(err); // an error occurred
+      else resolve(data);
+    });
+  });
+}
+exports.updateUserAttributes = updateUserAttributes;

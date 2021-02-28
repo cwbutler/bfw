@@ -33,13 +33,13 @@ export const subscribeUser = /* GraphQL */ `
 export const batchUpdateNotifications = /* GraphQL */ `
   mutation BatchUpdateNotifications($input: [NotificationsInput]) {
     batchUpdateNotifications(input: $input) {
-      id
       to
       subject
       body
       createdAt
       owner
       email
+      read
       updatedAt
     }
   }
@@ -68,53 +68,53 @@ export const batchUpdateUsers = /* GraphQL */ `
     }
   }
 `;
-export const createNotifications = /* GraphQL */ `
-  mutation CreateNotifications(
-    $input: CreateNotificationsInput!
-    $condition: ModelNotificationsConditionInput
+export const createBfwNotification = /* GraphQL */ `
+  mutation CreateBfwNotification(
+    $input: CreateBFWNotificationInput!
+    $condition: ModelBFWNotificationConditionInput
   ) {
-    createNotifications(input: $input, condition: $condition) {
-      id
+    createBFWNotification(input: $input, condition: $condition) {
       to
       subject
       body
       createdAt
       owner
       email
+      read
       updatedAt
     }
   }
 `;
-export const updateNotifications = /* GraphQL */ `
-  mutation UpdateNotifications(
-    $input: UpdateNotificationsInput!
-    $condition: ModelNotificationsConditionInput
+export const updateBfwNotification = /* GraphQL */ `
+  mutation UpdateBfwNotification(
+    $input: UpdateBFWNotificationInput!
+    $condition: ModelBFWNotificationConditionInput
   ) {
-    updateNotifications(input: $input, condition: $condition) {
-      id
+    updateBFWNotification(input: $input, condition: $condition) {
       to
       subject
       body
       createdAt
       owner
       email
+      read
       updatedAt
     }
   }
 `;
-export const deleteNotifications = /* GraphQL */ `
-  mutation DeleteNotifications(
-    $input: DeleteNotificationsInput!
-    $condition: ModelNotificationsConditionInput
+export const deleteBfwNotification = /* GraphQL */ `
+  mutation DeleteBfwNotification(
+    $input: DeleteBFWNotificationInput!
+    $condition: ModelBFWNotificationConditionInput
   ) {
-    deleteNotifications(input: $input, condition: $condition) {
-      id
+    deleteBFWNotification(input: $input, condition: $condition) {
       to
       subject
       body
       createdAt
       owner
       email
+      read
       updatedAt
     }
   }

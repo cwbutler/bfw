@@ -28,45 +28,45 @@ export const listAppUsers = /* GraphQL */ `
     }
   }
 `;
-export const getNotifications = /* GraphQL */ `
-  query GetNotifications($id: ID!, $owner: String!, $createdAt: AWSDateTime!) {
-    getNotifications(id: $id, owner: $owner, createdAt: $createdAt) {
-      id
+export const getBfwNotification = /* GraphQL */ `
+  query GetBfwNotification($owner: String!, $createdAt: AWSDateTime!) {
+    getBFWNotification(owner: $owner, createdAt: $createdAt) {
       to
       subject
       body
       createdAt
       owner
       email
+      read
       updatedAt
     }
   }
 `;
-export const listNotificationss = /* GraphQL */ `
-  query ListNotificationss(
-    $id: ID
-    $ownerCreatedAt: ModelNotificationsPrimaryCompositeKeyConditionInput
-    $filter: ModelNotificationsFilterInput
+export const listBfwNotifications = /* GraphQL */ `
+  query ListBfwNotifications(
+    $owner: String
+    $createdAt: ModelStringKeyConditionInput
+    $filter: ModelBFWNotificationFilterInput
     $limit: Int
     $nextToken: String
     $sortDirection: ModelSortDirection
   ) {
-    listNotificationss(
-      id: $id
-      ownerCreatedAt: $ownerCreatedAt
+    listBFWNotifications(
+      owner: $owner
+      createdAt: $createdAt
       filter: $filter
       limit: $limit
       nextToken: $nextToken
       sortDirection: $sortDirection
     ) {
       items {
-        id
         to
         subject
         body
         createdAt
         owner
         email
+        read
         updatedAt
       }
       nextToken

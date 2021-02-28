@@ -1,17 +1,17 @@
-type Notifications @model
+type BFWNotification @model
   @auth(rules: [
     { allow: private, provider: iam },
     { allow: private, provider: userPools }
   ])
-  @key(fields: ["id", "owner", "createdAt"])
+  @key(fields: ["owner", "createdAt"])
 {
-  id: ID!
   to: String!
   subject: String!
   body: String!
   createdAt: AWSDateTime!
   owner: String!
   email: String
+  read: Boolean
 }
 
 type Query {
@@ -21,7 +21,7 @@ type Query {
 type Mutation {
   createAppUser(input: UserInput): AppUser @function(name: "bfwCreateUserResolver-${env}")
   subscribeUser(input: SubscribeUserInput): Boolean @function(name: "bfwSubscribeUser-${env}")
-  batchUpdateNotifications(input: [NotificationsInput]): [Notifications] @aws_iam @aws_cognito_user_pools
+  batchUpdateNotifications(input: [NotificationsInput]): [BFWNotification] @aws_iam @aws_cognito_user_pools
   batchUpdateUsers(input: [UpdateUserInput]): [AppUser] @aws_iam @aws_cognito_user_pools
 }
 
@@ -33,6 +33,7 @@ input NotificationsInput {
   createdAt: AWSDateTime
   owner: String!
   email: String
+  read: String
 }
 
 input SubscribeUserInput {
@@ -74,7 +75,6 @@ input UpdateUserInput {
   createdAt: String
   updatedAt: String
 }
-
 type AppUserConnection @aws_cognito_user_pools @aws_iam {
   items: [AppUser]
   nextToken: String
