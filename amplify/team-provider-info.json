@@ -27,6 +27,17 @@
         "bfwFireWaterNotify": {
           "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
           "s3Key": "amplify-builds/bfwFireWaterNotify-724839316d672b496873-build.zip"
+        },
+        "bfwSendEmail": {
+          "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
+          "s3Key": "amplify-builds/bfwSendEmail-58686e52496b5763526b-build.zip"
+        }
+      },
+      "notifications": {
+        "Pinpoint": {
+          "Name": "bfwEmail-bfw",
+          "Id": "ac5ed3591c1d4ce2aca20bfda57b206e",
+          "Region": "us-east-1"
         }
       }
     },
