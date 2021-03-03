@@ -13,7 +13,8 @@
     },
     "categories": {
       "auth": {
-        "bfwfc5bcfcd": {}
+        "bfwfc5bcfcd": {},
+        "userPoolGroups": {}
       },
       "function": {
         "appsyncOperations": {
@@ -34,7 +35,7 @@
         },
         "bfwSendEmailToAdmin": {
           "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
-          "s3Key": "amplify-builds/bfwSendEmailToAdmin-51576b7a7a4b73664e4c-build.zip"
+          "s3Key": "amplify-builds/bfwSendEmailToAdmin-4e77336a6d6753316f30-build.zip"
         }
       },
       "notifications": {
