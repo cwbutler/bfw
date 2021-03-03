@@ -68,6 +68,11 @@ export const batchUpdateUsers = /* GraphQL */ `
     }
   }
 `;
+export const sendEmailToAdmin = /* GraphQL */ `
+  mutation SendEmailToAdmin($input: SendEmailToAdminInput) {
+    sendEmailToAdmin(input: $input)
+  }
+`;
 export const createBfwNotification = /* GraphQL */ `
   mutation CreateBfwNotification(
     $input: CreateBFWNotificationInput!

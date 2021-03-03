@@ -1,0 +1,10 @@
+{
+  "lambdaLayers": [
+    {
+      "type": "ProjectLayer",
+      "resourceName": "bfwLambdaUtils",
+      "version": 1
+    }
+  ],
+  "permissions": {}
+}

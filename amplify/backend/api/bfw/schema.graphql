@@ -23,11 +23,16 @@ type Mutation {
   subscribeUser(input: SubscribeUserInput): Boolean @function(name: "bfwSubscribeUser-${env}")
   batchUpdateNotifications(input: [NotificationsInput]): [BFWNotification] @aws_iam @aws_cognito_user_pools
   batchUpdateUsers(input: [UpdateUserInput]): [AppUser] @aws_iam @aws_cognito_user_pools
-  sendEmail(input: [SendEmailInput]): Boolean @function(name: "bfwSendEmail-${env}") @aws_iam @aws_cognito_user_pools
+  sendEmailToAdmin(input: SendEmailToAdminInput): Boolean @function(name: "bfwSendEmailToAdmin  -${env}") @aws_iam @aws_cognito_user_pools
 }
 
-input SendEmailInput {
-
+input SendEmailToAdminInput {
+  from: String!
+  subject: String!
+  text: String
+  html: String
+  cc: [String]
+  bcc: [String]
 }
 
 input NotificationsInput {

@@ -31,6 +31,10 @@
         "bfwSendEmail": {
           "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
           "s3Key": "amplify-builds/bfwSendEmail-58686e52496b5763526b-build.zip"
+        },
+        "bfwSendEmailToAdmin": {
+          "deploymentBucketName": "amplify-bfw-bfw-83405-deployment",
+          "s3Key": "amplify-builds/bfwSendEmailToAdmin-51576b7a7a4b73664e4c-build.zip"
         }
       },
       "notifications": {
